@@ -189,3 +189,31 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 .pc .ic{display:flex;width:46px;height:46px;border-radius:50%;background:var(--cyan);color:#fff;font-weight:700;font-size:22px;align-items:center;justify-content:center;margin-bottom:14px;}
 .pc h4{margin:0 0 8px;font-size:22px;color:var(--navy);text-transform:none;font-family:inherit;}
 .pc p{margin:0;font-size:19px;line-height:1.4;}
+
+/* Electivas: 3 cuadros más pequeños */
+.groups.g3{top:300px;left:54px;width:1110px;grid-template-columns:repeat(3,1fr);gap:24px;}
+.groups.g3 .grp{min-height:190px;padding:16px 20px;}
+.groups.g3 .grp h4{font-size:19px;}
+.groups.g3 .grp ul{font-size:18px;}
+.foot2{position:absolute;left:54px;top:540px;margin:0;font-size:17px;color:#6b6b6b;font-style:italic;}
+
+/* Diferenciales + actividades */
+.dsplit{position:absolute;left:54px;top:155px;width:1150px;display:grid;grid-template-columns:1.55fr 1fr;gap:30px;align-items:start;}
+ul.diff2{margin:0;padding-left:26px;font-size:21px;line-height:1.4;}
+ul.diff2 li{margin-bottom:16px;}
+ul.diff2 li::marker{color:var(--cyan);}
+.acts-box{background:var(--pale);border-radius:12px;padding:18px 22px;}
+.acts-box h4{margin:0 0 10px;font-size:21px;color:var(--navy);text-transform:none;font-family:inherit;}
+.acts-box ul{margin:0;padding-left:22px;font-size:19px;line-height:1.45;}
+.acts-box li{margin-bottom:8px;}
+.acts-box li::marker{color:var(--cyan);}
+.quote.dq{position:absolute;left:54px;top:575px;width:1110px;box-sizing:border-box;}
+
+/* Trabajo de grado */
+.tlead{position:absolute;left:54px;top:160px;width:1100px;font-size:22px;line-height:1.4;margin:0;}
+.mods4{position:absolute;left:54px;top:270px;width:1110px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.mods4 .mod{min-height:230px;padding:20px;border-radius:12px;}
+.mods4 .mod .ic{display:flex;width:42px;height:42px;border-radius:50%;background:var(--cyan);color:#fff;font-weight:700;font-size:20px;align-items:center;justify-content:center;margin-bottom:12px;}
+.mods4 .mod strong{font-size:20px;margin-bottom:8px;}
+.mods4 .mod span:not(.ic){font-size:18px;line-height:1.4;}
+.weeks{top:390px;}

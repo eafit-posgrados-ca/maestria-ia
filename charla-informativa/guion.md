@@ -133,9 +133,9 @@ Porque queremos formar líderes capaces de diseñar, integrar y escalar sistemas
 
 [clic] Primero, trabajamos los agentes de principio a fin: desde los agentes clásicos en Fundamentos de IA hasta agentes con modelos de lenguaje en producción.
 
-[clic] Segundo, enseñamos el ciclo actual de la IA: seleccionar, adaptar, evaluar y observar modelos.
+[clic] Segundo, enseñamos el ciclo de vida de la IA: seleccionar, adaptar, evaluar y observar modelos.
 
-[clic] Tercero, rigor matemático aplicado y aprender haciendo, con proyectos integradores y retos reales.
+[clic] Tercero, rigor matemático aplicado: fundamentos sólidos y aprender haciendo, con proyectos integradores.
 
 [clic] Y cuarto, IA responsable: la ética, la integridad y la gobernanza son transversales.
 
@@ -149,7 +149,7 @@ Ahora, ¿cómo se recorre todo esto en tres semestres? Lo pensamos como un camin
 
 El primer semestre es el de los fundamentos. Y empezamos con algo que muchas veces se olvida: la IA, antes que modelos, es la teoría de agentes. Un agente percibe su entorno, razona, busca, planifica y actúa. Eso lo vemos en Fundamentos de IA, y es exactamente la base conceptual de los agentes con modelos de lenguaje que veremos al final.
 
-En paralelo están Matemáticas aplicadas, Estadística aplicada, Aprendizaje automático, Aprendizaje profundo y la primera electiva.
+A la derecha ven las asignaturas del primer semestre en el plan de estudios. En paralelo con Fundamentos de IA están Matemáticas aplicadas, Estadística aplicada, Aprendizaje automático, Aprendizaje profundo y la primera electiva.
 
 ## Recorrido.2
 *(El ciclo percepción–acción en bucle.)*
@@ -169,7 +169,7 @@ Cuando la frontera necesita ser más compleja, pasamos al aprendizaje profundo: 
 ## Recorrido.5
 *(Segundo semestre: visión y lenguaje.)*
 
-El segundo semestre es el de las aplicaciones avanzadas. En Visión por computador trabajamos detección y segmentación: que el modelo encuentre y entienda lo que hay en una imagen. En Procesamiento de lenguaje natural llegamos a los transformers y al mecanismo de atención, que es lo que está detrás de los grandes modelos de lenguaje.
+El segundo semestre es el de las aplicaciones avanzadas. En Visión por computador aprendemos cómo un modelo "ve": un filtro recorre la imagen y va extrayendo características, como bordes y formas, y a partir de ellas el modelo detecta y segmenta lo que hay en la imagen; aquí, una persona. En Procesamiento de lenguaje natural llegamos a los transformers y al mecanismo de atención, que es lo que está detrás de los grandes modelos de lenguaje.
 
 En este semestre también empieza el Seminario de proyecto de grado, está Formación en integridad, con ética en datos e IA, y la segunda electiva.
 
@@ -190,7 +190,7 @@ Un agente es un modelo más herramientas, más memoria, más planificación. Y p
 
 En Operaciones en datos e IA aprendemos a llevarlo a producción y a operarlo. Esto es una traza: el registro de cada paso de una ejecución del agente, con su duración, los tokens que gastó, lo que costó y las herramientas que usó. Con las trazas se encuentran los errores, se controlan los costos y se explica lo que hizo el sistema. Y cada versión pasa por evaluaciones continuas antes de salir.
 
-En este semestre también están el trabajo de grado y la tercera electiva.
+En este semestre también está la tercera electiva y, como cierre de todo el recorrido, el trabajo de grado.
 
 ## Recorrido.9
 En resumen: del modelo al impacto. De los fundamentos matemáticos y los agentes clásicos a agentes con modelos de lenguaje, evaluados y observados en producción.
@@ -198,7 +198,7 @@ En resumen: del modelo al impacto. De los fundamentos matemáticos y los agentes
 ## PlanEstudios.0
 *(Semestre 1 y el contador de créditos.)*
 
-Este es el plan de estudios completo. En el primer semestre, 12 créditos: Matemáticas aplicadas, Estadística aplicada, Fundamentos de IA, Aprendizaje automático, Aprendizaje profundo y una electiva. Al final del semestre hay un primer proyecto integrador que reúne lo aprendido.
+Este es el plan de estudios completo. En el primer semestre, 12 créditos: Matemáticas aplicadas, Estadística aplicada, Fundamentos de IA, Aprendizaje automático, Aprendizaje profundo y una electiva. Las tres marcadas con asterisco, Fundamentos de IA, Aprendizaje automático y Aprendizaje profundo, se articulan en un primer proyecto integrador.
 
 Un dato importante: este primer semestre también funciona como línea de énfasis para nuestros estudiantes de pregrado, que pueden continuar luego en la maestría.
 
@@ -210,13 +210,13 @@ En el segundo semestre, otros 12 créditos: Visión por computador, Procesamient
 ## PlanEstudios.2
 *(Semestre 3.)*
 
-Y en el tercero, Operaciones en datos e IA, IA generativa, la tercera electiva y el trabajo de grado, que vale 6 créditos. En total, 36 créditos.
+Y en el tercero, Operaciones en datos e IA, IA generativa, la tercera electiva y, como cierre del programa, el trabajo de grado. En total, 36 créditos.
 
 ## PlanEstudios.3
 Cada asignatura de 2 créditos tiene 24 horas con el profesor y 72 horas de trabajo independiente.
 
 ## ELECTIVAS
-Las electivas permiten que cada estudiante oriente su formación según sus intereses.
+Una palabra sobre las electivas. Son asignaturas que cada estudiante elige para orientar su formación según sus intereses, y se selecciona una por semestre.
 
 [clic] Si quieren más matemáticas: Estadística avanzada, Optimización o Métodos numéricos.
 
@@ -224,22 +224,22 @@ Las electivas permiten que cada estudiante oriente su formación según sus inte
 
 [clic] Si es el trabajo con datos: Visualización, Almacenamiento y procesamiento de grandes datos.
 
-[clic] Y también pueden tomar asignaturas de la Maestría en Ciencias de los Datos y Analítica y de otros posgrados de la Escuela.
+Las electivas se abren según la cantidad de estudiantes inscritos.
 
 ## DIFERENCIALES
 ¿Qué nos diferencia?
 
 [clic] Una trayectoria académica completa: el programa se articula desde el pregrado, con la línea de énfasis, hasta el doctorado.
 
-[clic] Un currículo flexible, con 9 créditos electivos.
+[clic] Un currículo flexible, con una electiva por semestre y Formación en integridad.
 
 [clic] Aprendizaje práctico, con proyectos integradores en el primer y en el segundo semestre.
 
-[clic] Profesores de planta con doctorado, que investigan en grupos clasificados en A1 por Minciencias.
+[clic] Docentes con doctorado y docentes que vienen de la industria.
 
-[clic] Una formación en la IA actual: agentes, evaluaciones y LLMOps integrados al plan de estudios, y conexión con el entorno a través de retos con empresas y créditos en las principales nubes.
+[clic] Una formación en la IA actual: agentes, evaluaciones y LLMOps integrados al plan de estudios.
 
-[clic] Y microcredenciales: Fundamentos de IA, Aprendizaje profundo, Procesamiento de lenguaje natural e IA generativa conforman la Credencial en Inteligencia Artificial.
+[clic] Y a lo largo del programa hay actividades: charlas con expertos de la industria, retos y competencias de IA, proyectos con empresas, ONG y entidades públicas, y seminarios sobre tendencias en IA.
 
 [clic] Y algo que nos importa: sería la primera maestría en IA de una universidad antioqueña, presencial en Medellín.
 
@@ -253,16 +253,14 @@ Las electivas permiten que cada estudiante oriente su formación según sus inte
 [clic] Y puede desempeñarse como gestor de proyectos de IA, arquitecto o ingeniero de soluciones de IA, o consultor estratégico.
 
 ## TRABAJO
-El trabajo de grado vale 6 créditos y tiene cuatro modalidades. [clic] Un proyecto aplicado, un artículo en revista indexada en coautoría con el director, un caso de estudio aplicado o una pasantía en un grupo de investigación.
+El trabajo de grado es el cierre del programa. Lo que esperamos es "saber hacer": un prototipo funcional, una solución o un modelo implementado.
 
-Lo que esperamos es "saber hacer": un prototipo funcional, una solución o un modelo implementado.
-
-[clic] Y a lo largo del programa hay charlas con expertos de la industria, retos y competencias, proyectos con empresas, ONG y entidades públicas, y seminarios sobre tendencias en IA.
+[clic] Tiene cuatro modalidades: un proyecto aplicado; un artículo en revista indexada en coautoría con el director; un caso de estudio aplicado, o una pasantía en un grupo de investigación.
 
 ## HORARIOS
 En cuanto a horarios, el programa está pensado para profesionales que trabajan.
 
-Las clases empiezan el primer fin de semana de marzo de 2027. Las asignaturas obligatorias son los viernes y los sábados; las electivas, entre semana.
+Las clases empiezan el primer fin de semana de marzo de 2027. Entre semana, las clases son a partir de las cinco o seis de la tarde, y los sábados, en la mañana.
 
 [clic] Cada asignatura obligatoria se desarrolla durante tres fines de semana, [clic] [clic] y luego [clic] empieza la siguiente. No hay clases en Semana Santa ni en los fines de semana festivos.
 

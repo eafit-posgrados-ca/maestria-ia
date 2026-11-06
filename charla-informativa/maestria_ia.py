@@ -417,7 +417,7 @@ class Recorrido(Slide):
                 self.play(Create(seg), run_time=0.6)
             self.play(stops[i].animate.set_fill(CYAN).set_stroke(CYAN), labels[i][0].animate.set_color(CYAN), run_time=0.5)
 
-        def course_list(items, x=0.55, top=0.55, w=6.3, hi=None):
+        def course_list(items, x=0.55, top=0.25, w=6.3, hi=None, header=None):
             g = VGroup()
             for k, s in enumerate(items):
                 if hi is not None and k in hi:
@@ -429,18 +429,21 @@ class Recorrido(Slide):
                 g.add(c)
             g.arrange(DOWN, buff=0.12, aligned_edge=LEFT)
             g.move_to([x + w / 2, 0, 0]).align_to([0, top, 0], UP)
+            if header:
+                hd = T(header, 17, GRAY, bold=True).next_to(g, UP, buff=0.14, aligned_edge=LEFT)
+                return VGroup(hd, *g)  # hd queda en el índice 0
             return g
 
         # ================= 1a. Fundamentos de IA: agentes =================
         activate(0)
         fund = course_list([
-            "Fundamentos de IA · agentes, búsqueda y planificación",
+            "Fundamentos de IA",
             "Matemáticas aplicadas",
             "Estadística aplicada",
             "Aprendizaje automático",
             "Aprendizaje profundo",
             "Electiva 1",
-        ], hi=[0])
+        ], hi=[0], header="Plan de estudios · asignaturas del primer semestre")
         acen = np.array([-3.3, -1.45, 0])
         agent = VGroup(RoundedRectangle(width=2.6, height=1.5, corner_radius=0.2, fill_color=NAVY, fill_opacity=1, stroke_width=0),
                        VGroup(T("Agente", 22, WHITE, bold=True), T("búsqueda · planificación", 13, LIGHT),
@@ -470,9 +473,9 @@ class Recorrido(Slide):
 
         # ================= 1b. ML -> DL =================
         self.play(FadeOut(agent_grp, shift=LEFT * 0.4),
-                  fund[0][0].animate.set_fill(PALE), fund[0][1].animate.set_color(NAVY),
-                  *[fund[k][0].animate.set_fill(CYAN) for k in (3, 4)],
-                  *[fund[k][1].animate.set_color(WHITE) for k in (3, 4)], run_time=0.7)
+                  fund[1][0].animate.set_fill(PALE), fund[1][1].animate.set_color(NAVY),
+                  *[fund[k][0].animate.set_fill(CYAN) for k in (4, 5)],
+                  *[fund[k][1].animate.set_color(WHITE) for k in (4, 5)], run_time=0.7)
         eq = T("θ  ←  θ − η ∇L(θ)", 34, NAVY, bold=True).move_to([-3.3, 0.15, 0])
         cap = T("Matemáticas y estadística: el lenguaje de la IA", 17, GRAY, italic=True).next_to(eq, DOWN, buff=0.15)
         rng = np.random.default_rng(3)
@@ -504,20 +507,52 @@ class Recorrido(Slide):
         # ================= 2. Aplicaciones avanzadas =================
         self.play(FadeOut(stage1, shift=LEFT * 0.5), run_time=0.6)
         activate(1)
-        grid = VGroup(*[Square(0.34, stroke_width=0.6, stroke_color=WHITE,
-                               fill_color=interpolate_color(ManimColor(PALE), ManimColor(NAVY), rng.uniform(0, 0.55)),
-                               fill_opacity=1) for _ in range(49)]).arrange_in_grid(7, 7, buff=0)
-        grid.move_to([-3.3, -0.55, 0])
-        bbox = Rectangle(width=1.1, height=1.1, stroke_color="#46C69F", stroke_width=5).move_to(grid[24]).shift(UR * 0.17)
+        # Imagen 8x8 con una silueta; un filtro 3x3 la recorre y produce un mapa de características
+        pattern = ["........",
+                   "...##...",
+                   "...##...",
+                   "..####..",
+                   ".#.##.#.",
+                   "...##...",
+                   "..#..#..",
+                   "..#..#.."]
+        CS = 0.29
+        grid = VGroup()
+        for r in range(8):
+            for c in range(8):
+                on = pattern[r][c] == "#"
+                col = interpolate_color(ManimColor(PALE), ManimColor(NAVY), 0.85 if on else rng.uniform(0.0, 0.18))
+                grid.add(Square(CS, stroke_width=0.6, stroke_color=WHITE, fill_color=col, fill_opacity=1))
+        grid.arrange_in_grid(8, 8, buff=0).move_to([-4.85, -0.35, 0])
+        fmap = VGroup(*[Square(0.22, stroke_width=0.5, stroke_color=WHITE, fill_color=SOFT, fill_opacity=1)
+                        for _ in range(36)]).arrange_in_grid(6, 6, buff=0).move_to([-1.55, -0.35, 0])
+        conv_arrow = Arrow(grid.get_right() + RIGHT * 0.1, fmap.get_left() + LEFT * 0.1, buff=0, stroke_width=3,
+                           color=CYAN, max_tip_length_to_length_ratio=0.2)
+        conv_lbl = T("filtro", 14, CYAN, bold=True).next_to(conv_arrow, UP, buff=0.05)
+        fm_lbl = T("características", 13, GRAY).next_to(fmap, DOWN, buff=0.08)
+
+        def cell(r, c):
+            return grid[r * 8 + c]
+
+        def response(r, c):  # suma de la ventana 3x3 (r, c = esquina superior izquierda)
+            return sum(pattern[r + i][c + j] == "#" for i in range(3) for j in range(3)) / 9
+
+        kernel = Square(3 * CS, stroke_color=CYAN, stroke_width=5, fill_opacity=0)
+
+        def kpos(r, c):
+            return (cell(r, c).get_center() + cell(r + 2, c + 2).get_center()) / 2
+
+        bbox = Rectangle(width=5 * CS + 0.06, height=7 * CS + 0.06, stroke_color="#46C69F", stroke_width=5)
+        bbox.move_to((cell(1, 1).get_center() + cell(7, 6).get_center()) / 2)
         blab = T("persona 0.97", 14, WHITE, bold=True)
         blabel = VGroup(BackgroundRectangle(blab, color="#46C69F", fill_opacity=1, buff=0.05), blab).next_to(bbox, UP, buff=0, aligned_edge=LEFT)
-        vtag = T("Visión por computador", 16, GRAY, italic=True).next_to(grid, DOWN, buff=0.12)
+        vtag = T("Visión por computador", 16, GRAY, italic=True).next_to(VGroup(grid, fmap), DOWN, buff=0.12)
         toks = VGroup(*[chip(w, w=len(w) * 0.16 + 0.45, h=0.5, fill=CYAN, color=WHITE, size=17, bold=True)
                         for w in ["La", "IA", "transforma", "organizaciones"]]).arrange(RIGHT, buff=0.12)
         for t in toks:
             t[1].move_to(t[0])
         toks.move_to([-3.3, -3.05, 0])
-        atts = VGroup(*[ArcBetweenPoints(toks[i].get_top(), toks[j].get_top(), angle=-PI / 2.6, stroke_color=NAVY,
+        atts = VGroup(*[ArcBetweenPoints(toks[i].get_top(), toks[j].get_top(), angle=-PI / 3.4, stroke_color=NAVY,
                                          stroke_width=1 + 4 * w, stroke_opacity=0.35 + 0.6 * w)
                         for i, j, w in [(1, 2, 1.0), (1, 3, 0.6), (0, 1, 0.4), (2, 3, 0.8)]])
         ptag = T("Procesamiento de lenguaje natural", 16, GRAY, italic=True).next_to(toks, DOWN, buff=0.12)
@@ -527,14 +562,26 @@ class Recorrido(Slide):
             "Seminario de proyecto de grado",
             "Formación en integridad · ética en datos e IA",
             "Electiva 2",
-        ])
-        self.play(LaggedStart(*[FadeIn(s, scale=0.5) for s in grid], lag_ratio=0.01), FadeIn(vtag), run_time=1)
+        ], header="Asignaturas del segundo semestre")
+        self.play(LaggedStart(*[FadeIn(q, scale=0.5) for q in grid], lag_ratio=0.008), FadeIn(vtag), run_time=1)
+        self.play(GrowArrow(conv_arrow), FadeIn(conv_lbl), FadeIn(fmap), FadeIn(fm_lbl), run_time=0.6)
+        kernel.move_to(kpos(0, 0))
+        self.play(Create(kernel), run_time=0.3)
+        path = [(0, c) for c in range(6)] + [(2, c) for c in range(5, -1, -1)] + [(4, c) for c in range(6)]
+        for (r, c) in path:
+            v = response(r, c)
+            self.play(kernel.animate.move_to(kpos(r, c)),
+                      fmap[r * 6 + c].animate.set_fill(interpolate_color(ManimColor(SOFT), ManimColor(CYAN), min(1, v * 1.8))),
+                      run_time=0.12)
+        rest = [(r, c) for r in range(6) for c in range(6) if (r, c) not in path]
+        self.play(*[fmap[r * 6 + c].animate.set_fill(interpolate_color(ManimColor(SOFT), ManimColor(CYAN), min(1, response(r, c) * 1.8)))
+                    for (r, c) in rest], FadeOut(kernel), run_time=0.6)
         self.play(Create(bbox), FadeIn(blabel, shift=UP * 0.1))
         self.play(LaggedStart(*[FadeIn(t, shift=UP * 0.2) for t in toks], lag_ratio=0.15), FadeIn(ptag))
         self.play(LaggedStart(*[Create(a) for a in atts], lag_ratio=0.2), run_time=1.2)
         self.play(LaggedStart(*[FadeIn(c, shift=LEFT * 0.4) for c in adv], lag_ratio=0.15), run_time=1.2)
         self.next_slide(notes="Segundo semestre: visión por computador y PLN con transformers, la base de los modelos de lenguaje.")
-        stage2 = VGroup(grid, bbox, blabel, vtag, toks, atts, ptag, adv)
+        stage2 = VGroup(grid, fmap, conv_arrow, conv_lbl, fm_lbl, bbox, blabel, vtag, toks, atts, ptag, adv)
 
         # ================= 3a. IA generativa: del agente clásico al agente con LLM =================
         self.play(FadeOut(stage2, shift=LEFT * 0.5), run_time=0.6)
@@ -542,9 +589,9 @@ class Recorrido(Slide):
         gen = course_list([
             "IA generativa · LLM, RAG y agentes",
             "Operaciones en datos e IA · MLOps, LLMOps y AgentOps",
-            "Trabajo de grado aplicado (6 créditos)",
             "Electiva 3",
-        ], hi=[0])
+            "Trabajo de grado",
+        ], hi=[0], header="Asignaturas del tercer semestre")
         cen = np.array([-3.3, -1.35, 0])
         llm = VGroup(Circle(0.72, fill_color=NAVY, fill_opacity=1, stroke_width=0), T("LLM", 24, WHITE, bold=True)).move_to(cen)
         tool_names = ["Búsqueda", "Código", "Bases de datos", "APIs"]
@@ -651,20 +698,20 @@ class PlanEstudios(Slide):
         # (nombre, créditos, tipo, etiqueta)
         sem = [
             [("Matemáticas aplicadas", 2, "o", None), ("Estadística aplicada", 2, "o", None),
-             ("Fundamentos de IA", 2, "o", "agentes"), ("Aprendizaje automático", 2, "o", None),
-             ("Aprendizaje profundo", 2, "o", None), ("Electiva 1", 2, "e", None)],
+             ("Fundamentos de IA *", 2, "o", "agentes"), ("Aprendizaje automático *", 2, "o", None),
+             ("Aprendizaje profundo *", 2, "o", None), ("Electiva 1", 2, "e", None)],
             [("Visión por computador", 2, "o", None), ("Procesamiento de lenguaje natural", 2, "o", None),
              ("Seminario de proyecto de grado", 3, "i", None), ("Formación en integridad", 3, "e", None),
              ("Electiva 2", 2, "e", None)],
             [("Operaciones en datos e IA", 2, "o", "LLMOps"), ("IA generativa", 2, "o", "agentes"),
-             ("Trabajo de grado", 6, "i", None), ("Electiva 3", 2, "e", None)],
+             ("Electiva 3", 2, "e", None), ("Trabajo de grado", 6, "i", None)],
         ]
         xs = [-4.45, 0.0, 4.45]
         W, H, GAP = 4.1, 0.6, 0.15
         top = 1.35
         fills = {"o": CYAN, "e": GRAY, "i": NAVY}
         total = 0
-        integ = ["Proyecto integrador 1", "Proyecto integrador 2", None]
+        integ = ["* Proyecto integrador 1", "Proyecto integrador 2", None]
         notes = ["Semestre 1: fundamentos, incluidos los agentes en Fundamentos de IA. Funciona también como línea de énfasis para pregrado.",
                  "Semestre 2: visión, PLN y seminario de proyecto de grado.",
                  "Semestre 3: IA generativa y agentes, operación con MLOps y LLMOps, y trabajo de grado."]
@@ -704,7 +751,7 @@ class PlanEstudios(Slide):
             if integ[k]:
                 pill = VGroup(RoundedRectangle(width=W, height=0.45, corner_radius=0.22, stroke_color=CYAN,
                                                stroke_width=2, fill_opacity=0),
-                              T("★ " + integ[k], 16, CYAN, bold=True))
+                              T(integ[k], 16, CYAN, bold=True))
                 pill[1].move_to(pill[0])
                 pill.next_to(cards, DOWN, buff=0.18)
                 self.play(Create(pill[0]), FadeIn(pill[1]), run_time=0.5)

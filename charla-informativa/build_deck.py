@@ -144,8 +144,8 @@ PORQUE = static("""
 <div class="quote lead">Formamos líderes capaces de <strong>diseñar, integrar y escalar sistemas de IA responsables</strong>, desde el modelo hasta el despliegue</div>
 <div class="rows">
   <div class="row" {f0}><span class="ic">1</span><div><strong>Agentes de principio a fin:</strong> desde los agentes clásicos en Fundamentos de IA hasta agentes con LLM en producción</div></div>
-  <div class="row" {f1}><span class="ic">2</span><div><strong>El ciclo actual de la IA:</strong> seleccionar, adaptar, evaluar y observar modelos con MLOps y LLMOps</div></div>
-  <div class="row" {f2}><span class="ic">3</span><div><strong>Rigor matemático aplicado</strong> y aprender haciendo con proyectos integradores y retos reales</div></div>
+  <div class="row" {f1}><span class="ic">2</span><div><strong>El ciclo de vida de la IA:</strong> seleccionar, adaptar, evaluar y observar modelos con MLOps y LLMOps</div></div>
+  <div class="row" {f2}><span class="ic">3</span><div><strong>Rigor matemático aplicado:</strong> fundamentos sólidos y aprender haciendo con proyectos integradores</div></div>
   <div class="row" {f3}><span class="ic">4</span><div><strong>IA responsable:</strong> ética, integridad y gobernanza como eje transversal</div></div>
 </div>
 <p class="tagline" {f4}>No se trata solo de usar IA, sino de diseñar, evaluar y liderar soluciones completas</p>
@@ -155,30 +155,39 @@ PORQUE = static("""
 
 ELECTIVAS = static("""
 <h2>Asignaturas electivas</h2>
-<div class="groups">
+<div class="quote lead2">Las electivas permiten orientar la formación según los intereses de cada estudiante. <strong>Se selecciona una por semestre.</strong></div>
+<div class="groups g3">
   <div class="grp" {f0}><h4>Matemáticas y estadística</h4><ul><li>Estadística avanzada</li><li>Optimización</li><li>Métodos numéricos</li></ul></div>
   <div class="grp" {f1}><h4>Desarrollo de software</h4><ul><li>Computación en la nube</li><li>Desarrollo de software para IA</li></ul></div>
   <div class="grp" {f2}><h4>Procesamiento y visualización de datos</h4><ul><li>Visualización de datos</li><li>Almacenamiento y procesamiento de grandes datos</li></ul></div>
-  <div class="grp" {f3}><h4>Electivas del ecosistema</h4><ul><li>Asignaturas de la Maestría en Ciencias de los Datos y Analítica</li><li>Otros posgrados de la Escuela</li></ul></div>
 </div>
-<div class="bottomband">El estudiante cursa una electiva por semestre y <strong>Formación en integridad</strong> (3 créditos)</div>
-""".format(**{f"f{i}": frag(i) for i in range(4)}),
-    notes="Las electivas permiten orientar la formación: más matemáticas, más software o más datos.", lineas=False)
+<p class="foot2">Las electivas se abren según la cantidad de estudiantes inscritos</p>
+""".format(**{f"f{i}": frag(i) for i in range(3)}),
+    notes="", lineas=False)
 
 DIFERENCIALES = static("""
 <h2>Diferenciales del programa</h2>
-<ul class="diff">
-  <li {f0}><strong>Trayectoria académica:</strong> articulación con el Sistema Metro, desde la línea de énfasis en pregrado hasta el doctorado</li>
-  <li {f1}><strong>Currículo flexible:</strong> 9 créditos electivos (25 %), incluida Formación en integridad</li>
-  <li {f2}><strong>Aprendizaje práctico:</strong> proyectos integradores en el primer y el segundo semestre</li>
-  <li {f3}><strong>Docentes de planta con doctorado</strong> e investigación en grupos A1 de Minciencias</li>
-  <li {f4}><strong>IA actual:</strong> agentes, evaluaciones y LLMOps integrados al plan de estudios</li>
-  <li {f4}><strong>Conexión con el entorno:</strong> retos con empresas y créditos de nube en AWS, Google Cloud y Azure</li>
-  <li {f5}><strong>Microcredenciales:</strong> Fundamentos de IA, Aprendizaje profundo, PLN e IA generativa conforman la Credencial en IA</li>
-</ul>
-<div class="quote" {f6}>La primera maestría en IA de una universidad antioqueña, presencial en Medellín</div>
+<div class="dsplit">
+  <ul class="diff2">
+    <li {f0}><strong>Trayectoria académica:</strong> articulación con el Sistema Metro, desde la línea de énfasis en pregrado hasta el doctorado</li>
+    <li {f1}><strong>Currículo flexible:</strong> una electiva por semestre y Formación en integridad</li>
+    <li {f2}><strong>Aprendizaje práctico:</strong> proyectos integradores en el primer y el segundo semestre</li>
+    <li {f3}><strong>Docentes:</strong> con doctorado y de la industria</li>
+    <li {f4}><strong>IA actual:</strong> agentes, evaluaciones y LLMOps integrados al plan de estudios</li>
+  </ul>
+  <div class="acts-box" {f5}>
+    <h4>Actividades</h4>
+    <ul>
+      <li>Charlas con expertos de la industria</li>
+      <li>Retos y competencias de IA</li>
+      <li>Proyectos con empresas, ONG y entidades públicas</li>
+      <li>Seminarios sobre tendencias en IA</li>
+    </ul>
+  </div>
+</div>
+<div class="quote dq" {f6}>La primera maestría en IA de una universidad antioqueña, presencial en Medellín</div>
 """.format(**{f"f{i}": frag(i) for i in range(7)}),
-    notes="Lo que nos diferencia: trayectoria, flexibilidad, práctica, profesores e integración con el ecosistema.")
+    notes="Lo que nos diferencia.", lineas=False)
 
 PERFILES = static("""
 <h2>Perfiles del programa</h2>
@@ -197,38 +206,24 @@ PERFILES = static("""
     notes="Dirigido a profesionales con base cuantitativa que quieren liderar soluciones de IA.", lineas=False)
 
 TRABAJO = static("""
-<h2>Trabajo de grado y actividades</h2>
-<div class="split">
-  <div>
-    <h4 class="sub">Modalidades de trabajo de grado (6 créditos)</h4>
-    <div class="mods">
-      <div class="mod" {f0}><strong>Proyecto aplicado</strong><span>Solución a un problema con dominio del estado del arte</span></div>
-      <div class="mod" {f0}><strong>Artículo en revista indexada</strong><span>En coautoría con el director</span></div>
-      <div class="mod" {f0}><strong>Caso de estudio aplicado</strong><span>Problema real o hipotético con datos y método analítico</span></div>
-      <div class="mod" {f0}><strong>Pasantía</strong><span>En un grupo de investigación, de 3 a 6 meses</span></div>
-    </div>
-  </div>
-  <div>
-    <h4 class="sub">Actividades</h4>
-    <ul class="acts">
-      <li {f1}>Charlas con expertos de la industria</li>
-      <li {f1}>Retos y competencias de IA</li>
-      <li {f1}>Proyectos con empresas, ONG y entidades públicas</li>
-      <li {f1}>Seminarios sobre tendencias en IA</li>
-    </ul>
-  </div>
+<h2>Trabajo de grado</h2>
+<p class="tlead">Es el cierre del programa: el resultado esperado es <strong>saber hacer</strong>, con un prototipo, una solución o un modelo implementado</p>
+<div class="mods4">
+  <div class="mod" {f0}><span class="ic">1</span><strong>Proyecto aplicado</strong><span>Solución a un problema con dominio del estado del arte</span></div>
+  <div class="mod" {f0}><span class="ic">2</span><strong>Artículo en revista indexada</strong><span>En coautoría con el director</span></div>
+  <div class="mod" {f0}><span class="ic">3</span><strong>Caso de estudio aplicado</strong><span>Problema real o hipotético con datos y método analítico</span></div>
+  <div class="mod" {f0}><span class="ic">4</span><strong>Pasantía</strong><span>En un grupo de investigación, de 3 a 6 meses</span></div>
 </div>
-""".format(f0=frag(0), f1=frag(1)),
-    notes="El resultado esperado es saber hacer: un prototipo, una solución o un modelo implementado.")
+""".format(f0=frag(0)),
+    notes="El trabajo de grado es el cierre del programa.", lineas=False)
 
 HORARIOS = static("""
-<h2>Horarios (modalidad presencial)</h2>
+<h2>Horarios</h2>
 <ul class="diff tight">
   <li>Clases en horarios compatibles con la vida laboral</li>
-  <li>Sesiones sincrónicas y actividades asincrónicas (si aplica)</li>
   <li><strong>Inicio de clases:</strong> primer fin de semana de marzo de 2027</li>
-  <li><strong>Asignaturas obligatorias:</strong> viernes y sábados</li>
-  <li><strong>Asignaturas electivas:</strong> entre semana, en paralelo con las obligatorias</li>
+  <li><strong>Entre semana:</strong> a partir de las 5:00 o 6:00 p. m.</li>
+  <li><strong>Sábados:</strong> en la mañana</li>
 </ul>
 <div class="weeks">
   <div class="wk-lbl">Una asignatura obligatoria = 3 fines de semana</div>
@@ -239,7 +234,7 @@ HORARIOS = static("""
     <div class="wk next fragment fade-right" data-fragment-index="3"><span>Siguiente asignatura</span><b>→</b></div>
   </div>
 </div>
-""", notes="Pensado para profesionales que trabajan. No hay clases en Semana Santa ni fines de semana festivos.")
+""", notes="Pensado para profesionales que trabajan.")
 
 GRACIAS = (f'<section class="st gracias" data-transition="zoom">'
            f'<img class="photo" src="assets/campus.jpg" alt="Campus EAFIT">{LINEAS}'
