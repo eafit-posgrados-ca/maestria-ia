@@ -49,7 +49,7 @@ CONTACTO = static("""
 <div class="contact">
   <div class="person">
     <h3>Juan David Martínez Vargas, Ph.D.</h3>
-    <p class="role">Profesor gestor del programa</p>
+    <p class="role">Jefe del programa</p>
     <p>Área de Computación y Analítica</p>
     <p>Escuela de Ciencias Aplicadas e Ingeniería</p>
   </div>
@@ -70,13 +70,13 @@ CONTEXTO = static("""
     band_label="Contexto")
 
 PREGUNTAS = static("""
-<h2>Las preguntas que hoy se hacen las organizaciones</h2>
+<h2>Las preguntas que hoy surgen al trabajar con IA</h2>
 <div class="qa">
   <div class="q" {q0}>¿Qué modelo uso?</div><div class="a" {a0}><span><strong>Aprendizaje automático:</strong> generalización, métricas, sesgo y varianza</span></div>
   <div class="q" {q1}>¿Cómo sé que funciona en mi caso?</div><div class="a" {a1}><span><strong>Estadística:</strong> diseño de evaluaciones, incertidumbre y comparación rigurosa</span></div>
   <div class="q" {q2}>¿Por qué falla y cómo lo mejoro?</div><div class="a" {a2}><span><strong>Aprendizaje profundo y optimización:</strong> entender el modelo para adaptarlo</span></div>
   <div class="q" {q3}>¿Cómo decide un agente qué hacer?</div><div class="a" {a3}><span><strong>Fundamentos de IA:</strong> búsqueda, planificación y razonamiento</span></div>
-  <div class="q" {q4}>¿Qué pasó en cada paso y cuánto costó?</div><div class="a" {a4}><span><strong>Operaciones en datos e IA:</strong> trazas, evaluaciones continuas y LLMOps</span></div>
+  <div class="q" {q4}>¿Qué pasó en cada etapa y cuánto costó?</div><div class="a" {a4}><span><strong>Operaciones en datos e IA:</strong> trazas, evaluaciones continuas y LLMOps</span></div>
 </div>
 <div class="quote center" {fz}>Usar IA es fácil. <strong>Hacerla confiable exige fundamentos.</strong></div>
 """.format(**{f"q{i}": frag(2 * i) for i in range(5)}, **{f"a{i}": frag(2 * i + 1) for i in range(5)}, fz=frag(10)),
@@ -86,13 +86,15 @@ PREGUNTAS = static("""
     band_label="Contexto", lineas=False)
 
 EVOLUCION = static("""
-<h2>Evolución del perfil en inteligencia artificial</h2>
+<h2>Evolución del perfil en Inteligencia Artificial</h2>
 <div class="evo">
   <div class="col">
     <div class="tag">FORMACIÓN BASE</div>
     <ul>
-      <li>Programación en Python</li><li>Matemáticas y estadística</li>
-      <li>Análisis de datos</li><li>Entrenamiento de modelos clásicos</li>
+      <li>Programación en Python</li>
+      <li>Matemáticas y estadística</li>
+      <li>Análisis de datos</li>
+      <li>Entrenamiento de modelos clásicos</li>
     </ul>
   </div>
   <div class="arrow">➜</div>
@@ -100,10 +102,10 @@ EVOLUCION = static("""
     <div class="tag">EVOLUCIÓN REQUERIDA</div>
     <ul>
       <li {f0}>Aprendizaje profundo, visión y PLN</li>
-      <li {f1}>IA generativa y <strong>agentes</strong></li>
-      <li {f2}><strong>Selección y adaptación</strong> de modelos fundacionales</li>
-      <li {f3}><strong>Evaluaciones</strong> rigurosas (evals)</li>
-      <li {f4}>LLMOps: <strong>trazas</strong>, costos y observabilidad</li>
+      <li {f1}>IA generativa y agentes</li>
+      <li {f2}>Selección y adaptación de modelos fundacionales</li>
+      <li {f3}>Evaluación rigurosa de modelos</li>
+      <li {f4}>Operación con trazas, costos y observabilidad</li>
       <li {f5}>Ética, gobernanza y liderazgo de proyectos de IA</li>
     </ul>
   </div>
@@ -112,17 +114,44 @@ EVOLUCION = static("""
 """.format(**{f"f{i}": frag(i) for i in range(6)}),
     notes="El profesional en IA hoy decide qué modelo usar, lo adapta, lo evalúa y lo opera con trazabilidad, cada vez más en forma de agentes.")
 
+PROFUNDIZACION = static("""
+<h2>¿Qué es una maestría de profundización?</h2>
+<div class="cmp">
+  <div class="cc strong" {f0}>
+    <div class="tag">ESTA MAESTRÍA</div>
+    <h3>Profundización</h3>
+    <p>Desarrollo avanzado de competencias para resolver problemas y analizar situaciones de carácter disciplinar, interdisciplinario o profesional.</p>
+    <ul>
+      <li>Enfoque en el saber hacer, con rigor</li>
+      <li>Trabajo de grado aplicado: prototipo, solución o modelo implementado</li>
+      <li>Para profesionales que quieren liderar proyectos de IA</li>
+    </ul>
+  </div>
+  <div class="cc" {f1}>
+    <div class="tag">LA OTRA MODALIDAD</div>
+    <h3>Investigación</h3>
+    <p>Desarrollo de competencias científicas y formación avanzada en investigación para generar nuevo conocimiento.</p>
+    <ul>
+      <li>Tesis con un aporte original</li>
+      <li>Orientada a la carrera investigativa</li>
+    </ul>
+  </div>
+</div>
+<div class="quote" {f2}>Aplicar con rigor el estado del arte para resolver problemas reales: ese es el propósito de este programa</div>
+""".format(f0=frag(0), f1=frag(1), f2=frag(2)),
+    notes="", lineas=False)
+
 GENERALIDADES = static("""
 <h2>Generalidades de la maestría</h2>
 <div class="cards6">
   <div class="card" {f0}><div class="h">Denominación</div><div class="b">Maestría en Inteligencia Artificial</div></div>
   <div class="card" {f0}><div class="h">Título a otorgar</div><div class="b">Magíster en Inteligencia Artificial</div></div>
-  <div class="card" {f0}><div class="h">Modalidades</div><div class="b">Presencial y virtual *</div></div>
+  <div class="card" {f0}><div class="h">Modalidad</div><div class="b">Presencial</div></div>
   <div class="card" {f1}><div class="h">Duración</div><div class="b">3 semestres</div></div>
   <div class="card" {f1}><div class="h">Créditos</div><div class="b">36 créditos</div></div>
   <div class="card" {f1}><div class="h">Admisión</div><div class="b">Semestral</div></div>
 </div>
-<p class="foot">* Mismo plan de estudios en ambas modalidades · Inicio de clases: marzo de 2027</p>
+<p class="foot">Inicio de clases: marzo de 2027 · Medellín</p>
 """.format(f0=frag(0), f1=frag(1)),
     notes="Tres semestres, 36 créditos, presencial y virtual con el mismo plan de estudios.", lineas=False)
 
@@ -243,8 +272,8 @@ ORDER = [
     ("scene", "DosEpocas", None),
     ("html", "PREGUNTAS", PREGUNTAS),
     ("scene", "CicloIA", None),
-    ("scene", "ElegirModelo", None),
     ("html", "EVOLUCION", EVOLUCION),
+    ("html", "PROFUNDIZACION", PROFUNDIZACION),
     ("html", "GENERALIDADES", GENERALIDADES),
     ("html", "PORQUE", PORQUE),
     ("scene", "Recorrido", None),

@@ -24,7 +24,7 @@ pip install "manim==0.19.0" manim-slides   # manim 0.22 aún no es compatible co
 ## Render y ensamblado
 
 ```bash
-manim-slides render -qm maestria_ia.py Portada DosEpocas CicloIA ElegirModelo Recorrido PlanEstudios   # 720p30 (-qh para 1080p60)
+manim-slides render -qm maestria_ia.py Portada DosEpocas CicloIA Recorrido PlanEstudios   # 720p30 (-qh para 1080p60)
 python build_deck.py
 # servir la carpeta (los videos no cargan bien con file:// en algunos navegadores)
 cd dist && python -m http.server 8000   # abrir http://localhost:8000
@@ -33,7 +33,7 @@ cd dist && python -m http.server 8000   # abrir http://localhost:8000
 Solo las escenas animadas, con el presentador nativo de Manim Slides:
 
 ```bash
-manim-slides present Portada DosEpocas CicloIA ElegirModelo Recorrido PlanEstudios
+manim-slides present Portada DosEpocas CicloIA Recorrido PlanEstudios
 ```
 
 ## Guion (discurso)

@@ -3,9 +3,9 @@ Maestría en Inteligencia Artificial — EAFIT
 Escenas animadas (Manim Community + Manim Slides).
 
 Render:
-    manim-slides render -qh maestria_ia.py Portada DosEpocas CicloIA ElegirModelo Recorrido PlanEstudios
+    manim-slides render -qh maestria_ia.py Portada DosEpocas CicloIA Recorrido PlanEstudios
 Presentar solo las animadas:
-    manim-slides present Portada DosEpocas CicloIA ElegirModelo Recorrido PlanEstudios
+    manim-slides present Portada DosEpocas CicloIA Recorrido PlanEstudios
 Construir la presentación completa (animadas + HTML fijas):
     python build_deck.py
 """
@@ -101,7 +101,7 @@ class Portada(Slide):
         t2 = T("Inteligencia Artificial", 54, WHITE, bold=True)
         ttl = VGroup(t1, t2).arrange(DOWN, aligned_edge=LEFT, buff=0.2).to_edge(LEFT, buff=1.1).shift(UP * 1.25)
         sub = VGroup(
-            T("La inteligencia artificial se ha convertido", 22, LIGHT, italic=True),
+            T("La Inteligencia Artificial se ha convertido", 22, LIGHT, italic=True),
             T("en un estándar para la transformación", 22, LIGHT, italic=True),
             T("de las organizaciones", 22, LIGHT, italic=True),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
@@ -136,7 +136,7 @@ class DosEpocas(Slide):
         self.add(chrome)
         self.play(FadeIn(ttl, shift=RIGHT * 0.3), FadeIn(sub, shift=RIGHT * 0.3))
 
-        top, bottom = 1.45, -1.8
+        top, bottom = 1.1, -2.15
 
         def column(items, x, w, fill, txt_color, header, hcolor):
             boxes = VGroup()
@@ -187,15 +187,13 @@ class DosEpocas(Slide):
             t = VGroup(*[T(l, 16, WHITE, bold=True) for l in s.split("\n")]).arrange(DOWN, buff=0.04)
             fit(t, 2.2).move_to(b)
             pillars.add(VGroup(b, t))
-        pillars.arrange(RIGHT, buff=0.13).move_to([0, -2.62, 0])
+        pillars.arrange(RIGHT, buff=0.13).move_to([0, -3.15, 0])
         base_lbl = T("La misma base", 15, NAVY, bold=True).next_to(pillars, LEFT, buff=0).align_to(pillars, LEFT)
         base_lbl.next_to(pillars, UP, buff=0.06, aligned_edge=LEFT)
         self.play(LaggedStart(*[GrowFromEdge(p, DOWN) for p in pillars], lag_ratio=0.12), run_time=1.2)
         self.play(FadeIn(base_lbl))
         # ambas columnas "se apoyan": un leve asentamiento sobre la base
         self.play(VGroup(h1, b1, a1, h2, b2, a2).animate.shift(DOWN * 0.08), rate_func=there_and_back, run_time=0.6)
-        msg = T("Cambió el oficio, no la necesidad de entender", 22, CYAN, bold=True, italic=True).move_to([0, -3.55, 0])
-        self.play(FadeIn(msg, shift=UP * 0.2))
         self.next_slide(notes="Los dos flujos se apoyan en lo mismo. Elegir, adaptar y evaluar modelos exige más fundamentos, no menos.")
         for p in pillars:
             self.play(Indicate(p, color=CYAN, scale_factor=1.06), run_time=0.35)
@@ -330,122 +328,62 @@ class CicloIA(Slide):
         self.add(dot)
         self.play(MoveAlongPath(dot, path), run_time=4.5, rate_func=linear)
         self.remove(dot)
+        self.next_slide(notes="Zoom en la selección del modelo.")
 
+        # --- Zoom 1: selección del modelo ---
+        cyc = VGroup(nodes, arrows, hub)
+        self.play(FadeOut(VGroup(left, foot, leg)), cyc.animate.scale(0.6).move_to([-4.1, -0.95, 0]), run_time=1.0)
 
-# =====================================================================
-class ElegirModelo(Slide):
-    """¿Entrenar o elegir? Selección de modelo por criterios y evaluación antes de desplegar."""
+        def focus(idx):
+            return [nodes[k].animate.set_opacity(1 if k == idx else 0.25) for k in range(7)] + \
+                   [arrows.animate.set_opacity(0.25)]
 
-    def construct(self):
-        chrome = Group(band(), logo())
-        ttl = title("¿Entrenar o elegir un modelo?")
-        sub = T("Hoy la primera decisión suele ser qué modelo usar y cómo adaptarlo", 22, CYAN, bold=True)
-        sub.next_to(ttl, DOWN, aligned_edge=LEFT, buff=0.25)
-        self.add(chrome)
-        self.play(FadeIn(ttl, shift=RIGHT * 0.3), FadeIn(sub, shift=RIGHT * 0.3))
-
-        # --- Plano costo vs. calidad ---
-        O = np.array([-6.0, -3.45, 0])
-        W, H = 6.2, 4.3
-        ax = VGroup(Arrow(O, O + RIGHT * W, buff=0, stroke_width=2.5, color=GRAY, max_tip_length_to_length_ratio=0.03),
-                    Arrow(O, O + UP * H, buff=0, stroke_width=2.5, color=GRAY, max_tip_length_to_length_ratio=0.04))
-        xl = T("Costo y latencia por consulta", 16, GRAY).next_to(ax[0], DOWN, buff=0.1).align_to(ax[0], RIGHT)
-        yl = T("Calidad en la tarea", 16, GRAY).rotate(PI / 2).next_to(ax[1], LEFT, buff=0.1).align_to(ax[1], UP)
-
-        # (x, y, abierto?) en coordenadas relativas 0..1
-        models = [("A", 0.12, 0.38, True), ("B", 0.25, 0.62, True), ("C", 0.42, 0.74, False),
-                  ("D", 0.55, 0.58, True), ("E", 0.70, 0.88, False), ("F", 0.88, 0.93, False),
-                  ("G", 0.80, 0.55, False), ("H", 0.35, 0.45, False)]
-
-        def P(x, y):
-            return O + np.array([x * (W - 0.3), y * (H - 0.3), 0])
-
-        marks = VGroup()
-        for name, x, y, opn in models:
-            m = (Circle(0.15, fill_color=CYAN, fill_opacity=1, stroke_width=0) if opn
-                 else Square(0.28, fill_color=NAVY, fill_opacity=1, stroke_width=0))
-            m.move_to(P(x, y))
-            lab = T(f"Modelo {name}", 13, INK).next_to(m, UR, buff=0.04)
-            marks.add(VGroup(m, lab))
-        legend = VGroup(
-            VGroup(Circle(0.1, fill_color=CYAN, fill_opacity=1, stroke_width=0), T("Abierto (se puede alojar)", 14, INK)).arrange(RIGHT, buff=0.1),
-            VGroup(Square(0.18, fill_color=NAVY, fill_opacity=1, stroke_width=0), T("Comercial vía API", 14, INK)).arrange(RIGHT, buff=0.1),
-        ).arrange(RIGHT, buff=0.35).next_to(O + UP * H, RIGHT, buff=0.3).shift(DOWN * 0.1)
-
-        self.play(Create(ax), FadeIn(xl), FadeIn(yl))
-        self.play(LaggedStart(*[FadeIn(m, scale=0.4) for m in marks], lag_ratio=0.12), FadeIn(legend), run_time=1.4)
-
-        # Frontera de Pareto: A, B, C, E, F
-        front_ids = [0, 1, 2, 4, 5]
-        front = VMobject(stroke_color=CYAN, stroke_width=3).set_points_as_corners([P(models[i][1], models[i][2]) for i in front_ids])
-        front_dashed = DashedVMobject(front, num_dashes=40)
-        flab = T("Frontera de Pareto", 15, CYAN, bold=True).move_to(P(0.3, 0.86))
-
-        crit = VGroup(*[chip(s, w=5.4, h=0.56, size=17) for s in [
-            "Calidad medida en mi tarea, no en rankings",
+        X0 = -1.0
+        self.play(*focus(2), run_time=0.6)
+        h1 = T("Selección del modelo", 26, NAVY, bold=True).move_to([X0, 1.3, 0]).align_to([X0, 0, 0], LEFT)
+        s1 = T("No hay un mejor modelo en abstracto: hay un mejor modelo para una tarea", 17, GRAY, italic=True)
+        fit(s1, 7.6).next_to(h1, DOWN, buff=0.12, aligned_edge=LEFT)
+        crit = VGroup(*[chip(t, w=7.6, h=0.56, size=17) for t in [
+            "Calidad medida en la tarea propia, no en rankings públicos",
             "Costo por consulta y latencia",
-            "Privacidad, soberanía de datos y licencia",
+            "Privacidad, soberanía de datos y licencia: abierto o comercial",
             "Contexto, herramientas y soporte para agentes",
-        ]]).arrange(DOWN, buff=0.14, aligned_edge=LEFT).move_to([3.65, -0.35, 0])
-        crit_t = T("Criterios de selección", 19, INK, bold=True).next_to(crit, UP, buff=0.2, aligned_edge=LEFT)
-        train = chip("¿Entrenar? Solo si los datos o la tarea lo exigen", w=5.4, h=0.56, fill=NAVY, color=WHITE, size=17, bold=True)
+        ]]).arrange(DOWN, buff=0.14, aligned_edge=LEFT).next_to(s1, DOWN, buff=0.3, aligned_edge=LEFT)
+        train = chip("¿Entrenar? Solo si los datos o la tarea lo exigen", w=7.6, h=0.6, fill=NAVY, color=WHITE, size=18, bold=True)
         train.next_to(crit, DOWN, buff=0.3, aligned_edge=LEFT)
-
-        self.play(Create(front_dashed), FadeIn(flab), run_time=1.0)
-        self.play(FadeIn(crit_t), LaggedStart(*[FadeIn(c, shift=LEFT * 0.3) for c in crit], lag_ratio=0.15), run_time=1.2)
+        self.play(FadeIn(h1, shift=RIGHT * 0.2), FadeIn(s1))
+        self.play(LaggedStart(*[FadeIn(c, shift=LEFT * 0.3) for c in crit], lag_ratio=0.15), run_time=1.2)
         self.play(FadeIn(train, shift=UP * 0.2))
-        self.next_slide(notes="No hay un mejor modelo en abstracto: hay un mejor modelo para una tarea, un presupuesto y unas restricciones.")
+        self.next_slide(notes="Zoom en las evaluaciones.")
 
-        # Restricción de privacidad: se descartan los comerciales
-        priv = VGroup(Square(0.18, fill_color=NAVY, fill_opacity=1, stroke_width=0),
-                      T("Restricción: los datos no salen de la organización", 15, NAVY, bold=True)).arrange(RIGHT, buff=0.1)
-        priv.next_to(train, DOWN, buff=0.3, aligned_edge=LEFT)
-        closed = [marks[i] for i, mm in enumerate(models) if not mm[3]]
-        self.play(Indicate(crit[2], color=CYAN, scale_factor=1.04), FadeIn(priv, shift=UP * 0.1))
-        self.play(*[m.animate.set_opacity(0.15) for m in closed], front_dashed.animate.set_opacity(0.2),
-                  flab.animate.set_opacity(0.2), run_time=0.9)
-        # Se elige el mejor abierto que cumpla costo: B (o D si la calidad no alcanza)
-        ring = Circle(0.32, stroke_color="#46C69F", stroke_width=5).move_to(marks[1][0])
-        pick = T("Candidato", 15, "#46C69F", bold=True).next_to(ring, LEFT, buff=0.1)
-        self.play(Create(ring), FadeIn(pick))
-        self.next_slide(notes="Una restricción como la privacidad cambia por completo la decisión.")
-
-        # --- Evaluaciones antes de desplegar ---
-        plane = VGroup(ax, xl, yl, marks, legend, front_dashed, flab, priv)
-        self.play(FadeOut(VGroup(crit, crit_t, train)), FadeOut(plane), FadeOut(pick),
-                  ring.animate.move_to([-5.3, 0.55, 0]).scale(0.9), run_time=0.8)
-        cand = VGroup(Circle(0.17, fill_color=CYAN, fill_opacity=1, stroke_width=0), T("Modelo B + RAG + prompts", 18, INK, bold=True))
-        cand.arrange(RIGHT, buff=0.18).move_to(ring).align_to(ring, LEFT).shift(RIGHT * 0.13)
-        cand[0].move_to(ring)
-        evt = T("Evaluar antes de desplegar", 22, CYAN, bold=True).move_to([0.0, 0.55, 0]).align_to([0.6, 0, 0], LEFT)
-        self.play(FadeIn(cand[1], shift=RIGHT * 0.2), FadeIn(cand[0]), FadeIn(evt))
-
+        # --- Zoom 2: evaluaciones ---
+        self.play(FadeOut(VGroup(h1, s1, crit, train)), *focus(4), run_time=0.7)
+        h2 = T("Evaluaciones antes de desplegar", 26, NAVY, bold=True).move_to([X0, 1.3, 0]).align_to([X0, 0, 0], LEFT)
+        s2 = T("Las pruebas unitarias de la IA moderna", 17, GRAY, italic=True).next_to(h2, DOWN, buff=0.12, aligned_edge=LEFT)
         rows = [("Exactitud en casos de prueba propios", 0.91, "91 %"),
                 ("Fidelidad al contexto recuperado (RAG)", 0.88, "0,88"),
                 ("LLM como juez: utilidad de la respuesta", 0.86, "4,3 / 5"),
                 ("Seguridad, sesgos y datos sensibles", 1.0, "pasa"),
                 ("Regresión frente a la versión anterior", 1.0, "sin caídas")]
         table = VGroup()
-        y0 = -0.25
+        BX, BW = 3.35, 1.9
         for k, (name, v, txt) in enumerate(rows):
-            yk = y0 - k * 0.62
-            lbl = T(name, 18, INK).move_to([-6.0, yk, 0]).align_to([-6.0, 0, 0], LEFT)
-            bg = RoundedRectangle(width=4.2, height=0.32, corner_radius=0.16, fill_color=SOFT, fill_opacity=1, stroke_width=0)
-            bg.move_to([1.6, yk, 0]).align_to([-0.5, 0, 0], LEFT)
-            bar = RoundedRectangle(width=4.2 * v, height=0.32, corner_radius=0.16, fill_color=CYAN, fill_opacity=1, stroke_width=0)
-            bar.align_to(bg, LEFT).move_to([bg.get_left()[0] + 4.2 * v / 2, yk, 0])
-            val = T(txt, 17, NAVY, bold=True).next_to(bg, RIGHT, buff=0.25)
-            chk = T("✓", 24, "#46C69F", bold=True).next_to(val, RIGHT, buff=0.2)
+            yk = 0.2 - k * 0.6
+            lbl = fit(T(name, 16, INK), BX - X0 - 0.2).move_to([X0, yk, 0]).align_to([X0, 0, 0], LEFT)
+            bg = RoundedRectangle(width=BW, height=0.28, corner_radius=0.14, fill_color=SOFT, fill_opacity=1, stroke_width=0)
+            bg.move_to([BX + BW / 2, yk, 0])
+            bar = RoundedRectangle(width=BW * v, height=0.28, corner_radius=0.14, fill_color=CYAN, fill_opacity=1, stroke_width=0)
+            bar.move_to([BX + BW * v / 2, yk, 0])
+            val = T(txt, 15, NAVY, bold=True).next_to(bg, RIGHT, buff=0.15)
+            chk = T("✓", 20, "#46C69F", bold=True).next_to(val, RIGHT, buff=0.12)
             table.add(VGroup(lbl, bg, bar, val, chk))
+        ok = chip("Listo para desplegar y observar con trazas", w=7.6, h=0.58, fill=NAVY, color=WHITE, size=17, bold=True)
+        ok.move_to([X0 + 3.8, -3.05, 0])
+        self.play(FadeIn(h2, shift=RIGHT * 0.2), FadeIn(s2))
         for r in table:
-            self.play(FadeIn(r[0], shift=RIGHT * 0.2), FadeIn(r[1]), run_time=0.3)
-            self.play(GrowFromEdge(r[2], LEFT), FadeIn(r[3]), run_time=0.45)
-            self.play(FadeIn(r[4], scale=1.5), run_time=0.2)
-        ok = chip("Listo para desplegar y observar con trazas", w=6.0, h=0.6, fill=NAVY, color=WHITE, size=18, bold=True)
-        ok[1].move_to(ok[0])
-        ok.move_to([0.6, -3.65, 0])
-        self.play(FadeIn(ok, shift=UP * 0.2))
-        self.next_slide(notes="Las evaluaciones (evals) son las pruebas unitarias de la IA moderna: se corren antes de cada cambio.")
+            self.play(FadeIn(r[0], shift=RIGHT * 0.15), FadeIn(r[1]), run_time=0.25)
+            self.play(GrowFromEdge(r[2], LEFT), FadeIn(r[3]), FadeIn(r[4], scale=1.4), run_time=0.4)
+        self.play(FadeIn(ok, shift=UP * 0.2), *[nodes[k].animate.set_opacity(1) for k in (5, 6)], run_time=0.7)
 
 
 # =====================================================================
@@ -483,11 +421,13 @@ class Recorrido(Slide):
             g = VGroup()
             for k, s in enumerate(items):
                 if hi is not None and k in hi:
-                    c = chip(s, w=w, fill=CYAN, color=WHITE, bold=True)
+                    c = chip(s, w=w, h=0.54, fill=CYAN, color=WHITE, bold=True)
+                elif s.startswith("Electiva"):
+                    c = chip(s, w=w, h=0.54, fill=GRAY, color=WHITE, bold=True)
                 else:
-                    c = chip(s, w=w)
+                    c = chip(s, w=w, h=0.54)
                 g.add(c)
-            g.arrange(DOWN, buff=0.16, aligned_edge=LEFT)
+            g.arrange(DOWN, buff=0.12, aligned_edge=LEFT)
             g.move_to([x + w / 2, 0, 0]).align_to([0, top, 0], UP)
             return g
 
@@ -499,6 +439,7 @@ class Recorrido(Slide):
             "Estadística aplicada",
             "Aprendizaje automático",
             "Aprendizaje profundo",
+            "Electiva 1",
         ], hi=[0])
         acen = np.array([-3.3, -1.45, 0])
         agent = VGroup(RoundedRectangle(width=2.6, height=1.5, corner_radius=0.2, fill_color=NAVY, fill_opacity=1, stroke_width=0),
@@ -585,6 +526,7 @@ class Recorrido(Slide):
             "Procesamiento de lenguaje natural · transformers",
             "Seminario de proyecto de grado",
             "Formación en integridad · ética en datos e IA",
+            "Electiva 2",
         ])
         self.play(LaggedStart(*[FadeIn(s, scale=0.5) for s in grid], lag_ratio=0.01), FadeIn(vtag), run_time=1)
         self.play(Create(bbox), FadeIn(blabel, shift=UP * 0.1))
@@ -601,6 +543,7 @@ class Recorrido(Slide):
             "IA generativa · LLM, RAG y agentes",
             "Operaciones en datos e IA · MLOps, LLMOps y AgentOps",
             "Trabajo de grado aplicado (6 créditos)",
+            "Electiva 3",
         ], hi=[0])
         cen = np.array([-3.3, -1.35, 0])
         llm = VGroup(Circle(0.72, fill_color=NAVY, fill_opacity=1, stroke_width=0), T("LLM", 24, WHITE, bold=True)).move_to(cen)

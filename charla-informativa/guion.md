@@ -19,7 +19,7 @@ Buenas tardes y bienvenidos. Gracias por acompañarnos en esta charla sobre la M
 En los próximos minutos les voy a contar tres cosas: por qué creemos que hoy hace falta una maestría como esta, qué van a aprender y cómo está organizado el programa. Al final tendremos tiempo para sus preguntas.
 
 ## CONTACTO
-Soy Juan David Martínez, profesor del Área de Computación y Analítica de la Escuela de Ciencias Aplicadas e Ingeniería, y he estado a cargo de la construcción de este programa.
+Soy Juan David Martínez, profesor del Área de Computación y Analítica de la Escuela de Ciencias Aplicadas e Ingeniería, y soy el jefe de la Maestría en Inteligencia Artificial.
 
 *(Si hay más personas del equipo, preséntalas aquí.)*
 
@@ -38,17 +38,17 @@ Hoy ese mismo problema se resuelve de otra manera. Muchas veces no empezamos ent
 El flujo de trabajo cambió muchísimo en muy poco tiempo.
 
 ## DosEpocas.2
-*(Sube la base común y aparece el mensaje.)*
+*(Sube la base común.)*
 
 Pero fíjense en esto: los dos flujos se apoyan en lo mismo. Matemáticas, estadística, aprendizaje automático, aprendizaje profundo, y la teoría de agentes, de búsqueda y de planificación.
 
-Cambió el oficio, no la necesidad de entender. Y yo diría que hoy esa base hace más falta que antes: elegir bien un modelo, adaptarlo y saber si de verdad funciona exige entender lo que hay por dentro.
+Cambió el enfoque, no la necesidad de entender. Y yo diría que hoy esa base hace más falta que antes: elegir bien un modelo, adaptarlo y saber si de verdad funciona exige entender lo que hay por dentro.
 
 ## DosEpocas.3
 Por eso esta maestría tiene las dos cosas: lo más actual de la IA y una fundamentación sólida que no se vuelve obsoleta con la próxima herramienta.
 
 ## PREGUNTAS
-Veámoslo desde las preguntas que hoy se hacen las organizaciones cuando quieren usar IA en serio.
+Veámoslo desde las preguntas que hoy surgen cuando se trabaja con IA en serio, ya sea en una empresa, en una entidad pública o en un proyecto propio.
 
 [clic] ¿Qué modelo uso? [clic] Responder eso bien es aprendizaje automático: entender generalización, métricas, sesgo y varianza.
 
@@ -58,7 +58,7 @@ Veámoslo desde las preguntas que hoy se hacen las organizaciones cuando quieren
 
 [clic] ¿Cómo decide un agente qué hacer? [clic] Eso es Fundamentos de IA: búsqueda, planificación y razonamiento.
 
-[clic] Y, una vez en producción: ¿qué pasó en cada paso y cuánto costó? [clic] Eso es operación de la IA: trazas, evaluaciones continuas, LLMOps.
+[clic] Y, una vez en producción: ¿qué pasó en cada etapa y cuánto costó? [clic] Eso es operación de la IA: trazas, evaluaciones continuas, LLMOps.
 
 [clic] Usar IA hoy es fácil. Hacerla confiable exige fundamentos. Esa es la idea que atraviesa todo el programa.
 
@@ -77,44 +77,50 @@ Las etapas en azul oscuro son las que más han cambiado: selección, evaluacione
 ## CicloIA.2
 *(El punto recorre el ciclo en bucle.)*
 
-Es un ciclo, no una línea: una solución de IA no se termina el día que se despliega.
+Es un ciclo, no una línea: una solución de IA no se termina el día que se despliega. Detengámonos en dos de estas etapas.
 
-## ElegirModelo.0
-Detengámonos en esa decisión nueva: ¿entrenar o elegir un modelo?
+## CicloIA.3
+*(El ciclo se reduce y se resalta "Selección del modelo".)*
 
-Aquí cada punto es un modelo candidato. Los círculos son modelos abiertos, que la organización puede alojar en su propia infraestructura; los cuadrados son modelos comerciales que se usan a través de una API. En el eje horizontal está el costo y la latencia por consulta; en el vertical, la calidad en la tarea.
+Primero, la selección del modelo. La pregunta ya no es solo cómo entrenar, sino qué modelo usar. Y no hay un mejor modelo en abstracto: hay un mejor modelo para una tarea, un presupuesto y unas restricciones.
 
-La línea punteada es la frontera de Pareto: los modelos para los que no existe otro más barato y mejor a la vez.
+Se decide con criterios: la calidad medida en la tarea propia, no en los rankings públicos; el costo por consulta y la latencia; la privacidad, la soberanía de los datos y la licencia, es decir, si conviene un modelo abierto que se pueda alojar o uno comercial; y el soporte para contexto, herramientas y agentes.
 
-¿Cómo se decide? Con criterios: la calidad medida en la tarea propia, no en los rankings públicos; el costo y la latencia; la privacidad, la soberanía de los datos y la licencia; y el soporte para contexto largo, herramientas y agentes. ¿Y entrenar? Solo cuando los datos o la tarea lo exigen.
+¿Y entrenar? Solo cuando los datos o la tarea lo exigen.
 
-## ElegirModelo.1
-*(Aparece la restricción de privacidad.)*
+## CicloIA.4
+*(Se resalta "Evaluaciones".)*
 
-Y miren lo que pasa cuando aparece una restricción real, por ejemplo que los datos no pueden salir de la organización. Los modelos comerciales quedan descartados y la mejor opción ya no es la que parecía. No existe un mejor modelo en abstracto: existe un mejor modelo para una tarea, un presupuesto y unas restricciones.
+Y antes de desplegar, el modelo elegido se evalúa: exactitud en casos de prueba propios, fidelidad al contexto que recupera, un LLM que actúa como juez de la utilidad de las respuestas, pruebas de seguridad y sesgos, y pruebas de regresión frente a la versión anterior.
 
-## ElegirModelo.2
-*(Aparecen las evaluaciones.)*
-
-Y antes de desplegar, el candidato se evalúa. Exactitud en casos de prueba propios, fidelidad al contexto que recupera, un LLM que actúa como juez de la utilidad de las respuestas, pruebas de seguridad y sesgos, y pruebas de regresión frente a la versión anterior.
-
-Las evaluaciones son, de alguna forma, las pruebas unitarias de la IA moderna. Y diseñarlas bien es, otra vez, estadística.
+Las evaluaciones son, de alguna forma, las pruebas unitarias de la IA moderna. Y diseñarlas bien es, otra vez, estadística. Solo entonces el sistema está listo para desplegarse y observarse con trazas.
 
 *(Las cifras de la diapositiva son ilustrativas.)*
 
 ## EVOLUCION
 Todo esto cambia el perfil que se necesita.
 
-La formación base sigue siendo indispensable: programación, matemáticas, estadística, análisis de datos, entrenar modelos.
+La formación base sigue siendo indispensable: programación en Python, matemáticas y estadística, análisis de datos y entrenamiento de modelos clásicos.
 
-Pero hoy se espera más. [clic] Aprendizaje profundo, visión y lenguaje. [clic] IA generativa y agentes. [clic] Saber seleccionar y adaptar modelos fundacionales. [clic] Diseñar evaluaciones rigurosas. [clic] Operar sistemas con trazas, control de costos y observabilidad. [clic] Y la ética, la gobernanza y el liderazgo de proyectos de IA.
+Pero hoy se espera más. [clic] Aprendizaje profundo, visión y lenguaje. [clic] IA generativa y agentes. [clic] Selección y adaptación de modelos fundacionales. [clic] Evaluación rigurosa de modelos. [clic] Operación con trazas, control de costos y observabilidad. [clic] Y ética, gobernanza y liderazgo de proyectos de IA.
 
 El valor ya no está solo en entrenar modelos, sino en elegir, adaptar, evaluar y operar el adecuado.
+
+## PROFUNDIZACION
+Antes de los datos del programa, una aclaración importante: esta es una maestría de profundización.
+
+[clic] En Colombia, una maestría de profundización busca el desarrollo avanzado de competencias para resolver problemas y analizar situaciones de carácter disciplinar, interdisciplinario o profesional. El énfasis está en saber hacer, con rigor. Por eso el trabajo de grado es aplicado: un prototipo, una solución, un modelo implementado.
+
+[clic] La otra modalidad es la maestría de investigación, que forma competencias científicas para generar conocimiento nuevo, con una tesis que hace un aporte original.
+
+[clic] Nuestro propósito es que ustedes apliquen con rigor el estado del arte para resolver problemas reales.
+
+*(Si preguntan por el doctorado: el programa se articula con el Sistema Metro de la Escuela, del pregrado al doctorado. Para detalles de homologación, remitir a la oficina de admisiones.)*
 
 ## GENERALIDADES
 Vamos a los datos del programa.
 
-[clic] Es la Maestría en Inteligencia Artificial, otorga el título de Magíster en Inteligencia Artificial y se ofrece en modalidad presencial y virtual, con el mismo plan de estudios y los mismos profesores.
+[clic] Es la Maestría en Inteligencia Artificial, otorga el título de Magíster en Inteligencia Artificial y se ofrece en modalidad presencial, en Medellín.
 
 [clic] Dura tres semestres, tiene 36 créditos y la admisión es semestral. La primera cohorte empieza en marzo de 2027.
 
@@ -141,7 +147,7 @@ Ahora, ¿cómo se recorre todo esto en tres semestres? Lo pensamos como un camin
 
 El primer semestre es el de los fundamentos. Y empezamos con algo que muchas veces se olvida: la IA, antes que modelos, es la teoría de agentes. Un agente percibe su entorno, razona, busca, planifica y actúa. Eso lo vemos en Fundamentos de IA, y es exactamente la base conceptual de los agentes con modelos de lenguaje que veremos al final.
 
-En paralelo están Matemáticas aplicadas, Estadística aplicada, Aprendizaje automático y Aprendizaje profundo.
+En paralelo están Matemáticas aplicadas, Estadística aplicada, Aprendizaje automático, Aprendizaje profundo y la primera electiva.
 
 ## Recorrido.2
 *(El ciclo percepción–acción en bucle.)*
@@ -163,7 +169,7 @@ Cuando la frontera necesita ser más compleja, pasamos al aprendizaje profundo: 
 
 El segundo semestre es el de las aplicaciones avanzadas. En Visión por computador trabajamos detección y segmentación: que el modelo encuentre y entienda lo que hay en una imagen. En Procesamiento de lenguaje natural llegamos a los transformers y al mecanismo de atención, que es lo que está detrás de los grandes modelos de lenguaje.
 
-En este semestre también empieza el Seminario de proyecto de grado y está Formación en integridad, con ética en datos e IA.
+En este semestre también empieza el Seminario de proyecto de grado, está Formación en integridad, con ética en datos e IA, y la segunda electiva.
 
 ## Recorrido.6
 *(Tercer semestre: el agente con LLM.)*
@@ -182,7 +188,7 @@ Un agente es un modelo más herramientas, más memoria, más planificación. Y p
 
 En Operaciones en datos e IA aprendemos a llevarlo a producción y a operarlo. Esto es una traza: el registro de cada paso de una ejecución del agente, con su duración, los tokens que gastó, lo que costó y las herramientas que usó. Con las trazas se encuentran los errores, se controlan los costos y se explica lo que hizo el sistema. Y cada versión pasa por evaluaciones continuas antes de salir.
 
-En este semestre también está el trabajo de grado.
+En este semestre también están el trabajo de grado y la tercera electiva.
 
 ## Recorrido.9
 En resumen: del modelo al impacto. De los fundamentos matemáticos y los agentes clásicos a agentes con modelos de lenguaje, evaluados y observados en producción.
