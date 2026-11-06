@@ -149,6 +149,14 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 .qa{grid-template-columns:470px 1fr;}
 .qa .q{font-size:20px;}
 .quote.center{top:560px;width:1170px;}
+
+/* Guion en la misma ventana (tecla N) */
+.reveal .speaker-notes{font-family:Arial,"Liberation Sans",sans-serif;font-size:17px;line-height:1.45;color:#1A2431;
+  background:rgba(255,255,255,.97);border:1.5px solid #009EE2;border-radius:8px;max-height:38vh;overflow:auto;padding:14px 18px;}
+.reveal .speaker-notes p{margin:0 0 10px;}
+.reveal .speaker-notes .clic{color:#009EE2;}
+.reveal .speaker-notes .cue{color:#888;}
+.reveal.show-notes .speaker-notes{max-height:calc(100% - 20px);font-size:16px;}
 </style></head>
 <body><div class="reveal"><div class="slides">
 <section class="mv" data-background-video="videos/Portada_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="#006" data-transition="fade" data-background-transition="fade"><aside class="notes"><p><em class="cue">(Mientras se arma la red y aparece el título.)</em></p><p>Buenas tardes y bienvenidos. Gracias por acompañarnos en esta charla sobre la Maestría en Inteligencia Artificial de EAFIT.</p></aside></section>
@@ -331,5 +339,7 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 <script>
 Reveal.initialize({width:1280,height:720,margin:0,minScale:0.2,maxScale:2,center:false,hash:true,
   controls:true,progress:true,slideNumber:false,transition:'fade',backgroundTransition:'fade',
-  plugins:[RevealNotes]});
+  plugins:[RevealNotes],
+  // N: muestra u oculta el guion dentro de la misma ventana (útil para ensayar con una sola pantalla)
+  keyboard:{78:function(){Reveal.configure({showNotes:!Reveal.getConfig().showNotes});}}});
 </script></body></html>

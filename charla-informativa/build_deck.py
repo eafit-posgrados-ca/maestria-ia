@@ -358,7 +358,9 @@ def build():
 <script>
 Reveal.initialize({{width:1280,height:720,margin:0,minScale:0.2,maxScale:2,center:false,hash:true,
   controls:true,progress:true,slideNumber:false,transition:'fade',backgroundTransition:'fade',
-  plugins:[RevealNotes]}});
+  plugins:[RevealNotes],
+  // N: muestra u oculta el guion dentro de la misma ventana (útil para ensayar con una sola pantalla)
+  keyboard:{{78:function(){{Reveal.configure({{showNotes:!Reveal.getConfig().showNotes}});}}}}}});
 </script></body></html>"""
     (DIST / "index.html").write_text(html, encoding="utf-8")
     print("OK ->", DIST / "index.html", "|", len(sections), "secciones")

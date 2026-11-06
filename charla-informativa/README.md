@@ -45,7 +45,8 @@ Para cambiarlo: editar `guion.md` y ejecutar `python build_deck.py && python bui
 ## Durante la presentación
 
 - `→` / `espacio`: siguiente paso (las diapositivas fijas revelan sus elementos en orden).
-- `S`: vista del presentador con notas.
+- `S`: vista del presentador en otra ventana (diapositiva actual, siguiente, cronómetro y guion). Si no abre, permitir ventanas emergentes.
+- `N`: muestra u oculta el guion al lado de la diapositiva, en la misma ventana (para ensayar con una sola pantalla).
 - `F`: pantalla completa.
 - Las diapositivas en bucle (señales en la red, el agente usando herramientas, el ciclo agente–entorno) se repiten hasta avanzar.
 

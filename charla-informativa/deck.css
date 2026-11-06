@@ -144,3 +144,11 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 .qa{grid-template-columns:470px 1fr;}
 .qa .q{font-size:20px;}
 .quote.center{top:560px;width:1170px;}
+
+/* Guion en la misma ventana (tecla N) */
+.reveal .speaker-notes{font-family:Arial,"Liberation Sans",sans-serif;font-size:17px;line-height:1.45;color:#1A2431;
+  background:rgba(255,255,255,.97);border:1.5px solid #009EE2;border-radius:8px;max-height:38vh;overflow:auto;padding:14px 18px;}
+.reveal .speaker-notes p{margin:0 0 10px;}
+.reveal .speaker-notes .clic{color:#009EE2;}
+.reveal .speaker-notes .cue{color:#888;}
+.reveal.show-notes .speaker-notes{max-height:calc(100% - 20px);font-size:16px;}
