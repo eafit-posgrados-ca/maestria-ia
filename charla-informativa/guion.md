@@ -109,13 +109,15 @@ El valor ya no está solo en entrenar modelos, sino en elegir, adaptar, evaluar 
 ## PROFUNDIZACION
 Antes de los datos del programa, una aclaración importante: esta es una maestría de profundización.
 
-[clic] En Colombia, una maestría de profundización busca el desarrollo avanzado de competencias para resolver problemas y analizar situaciones de carácter disciplinar, interdisciplinario o profesional. El énfasis está en saber hacer, con rigor. Por eso el trabajo de grado es aplicado: un prototipo, una solución, un modelo implementado.
+En Colombia, una maestría de profundización busca el desarrollo avanzado de competencias para resolver problemas y analizar situaciones de carácter disciplinar, interdisciplinario o profesional.
 
-[clic] La otra modalidad es la maestría de investigación, que forma competencias científicas para generar conocimiento nuevo, con una tesis que hace un aporte original.
+[clic] Eso significa saber hacer, con rigor: profundizar en los fundamentos y en el estado del arte para aplicarlos a problemas reales.
 
-[clic] Nuestro propósito es que ustedes apliquen con rigor el estado del arte para resolver problemas reales.
+[clic] Por eso el trabajo de grado es aplicado: un prototipo funcional, una solución o un modelo implementado.
 
-*(Si preguntan por el doctorado: el programa se articula con el Sistema Metro de la Escuela, del pregrado al doctorado. Para detalles de homologación, remitir a la oficina de admisiones.)*
+[clic] Y está pensada para profesionales que quieren dirigir proyectos de IA en sus organizaciones.
+
+*(Si preguntan por la maestría de investigación o el doctorado: el programa se articula con el Sistema Metro de la Escuela, del pregrado al doctorado. Para detalles de homologación, remitir a la oficina de admisiones.)*
 
 ## GENERALIDADES
 Vamos a los datos del programa.

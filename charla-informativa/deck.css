@@ -181,3 +181,11 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 .cc li::marker{color:var(--cyan);}
 .cmp + .quote{position:absolute;left:54px;top:560px;width:1110px;}
 .quote.center{top:530px;}
+
+/* Profundización (sin comparación) */
+.quote.lead2{position:absolute;left:54px;top:170px;width:1110px;font-size:23px;box-sizing:border-box;}
+.pcards{position:absolute;left:54px;top:330px;width:1110px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.pc{background:var(--pale);border-radius:12px;padding:22px 24px;min-height:220px;box-sizing:border-box;}
+.pc .ic{display:flex;width:46px;height:46px;border-radius:50%;background:var(--cyan);color:#fff;font-weight:700;font-size:22px;align-items:center;justify-content:center;margin-bottom:14px;}
+.pc h4{margin:0 0 8px;font-size:22px;color:var(--navy);text-transform:none;font-family:inherit;}
+.pc p{margin:0;font-size:19px;line-height:1.4;}

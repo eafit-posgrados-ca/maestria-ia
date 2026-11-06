@@ -116,28 +116,12 @@ EVOLUCION = static("""
 
 PROFUNDIZACION = static("""
 <h2>¿Qué es una maestría de profundización?</h2>
-<div class="cmp">
-  <div class="cc strong" {f0}>
-    <div class="tag">ESTA MAESTRÍA</div>
-    <h3>Profundización</h3>
-    <p>Desarrollo avanzado de competencias para resolver problemas y analizar situaciones de carácter disciplinar, interdisciplinario o profesional.</p>
-    <ul>
-      <li>Enfoque en el saber hacer, con rigor</li>
-      <li>Trabajo de grado aplicado: prototipo, solución o modelo implementado</li>
-      <li>Para profesionales que quieren liderar proyectos de IA</li>
-    </ul>
-  </div>
-  <div class="cc" {f1}>
-    <div class="tag">LA OTRA MODALIDAD</div>
-    <h3>Investigación</h3>
-    <p>Desarrollo de competencias científicas y formación avanzada en investigación para generar nuevo conocimiento.</p>
-    <ul>
-      <li>Tesis con un aporte original</li>
-      <li>Orientada a la carrera investigativa</li>
-    </ul>
-  </div>
+<div class="quote lead2">Busca el <strong>desarrollo avanzado de competencias</strong> para resolver problemas y analizar situaciones de carácter disciplinar, interdisciplinario o profesional</div>
+<div class="pcards">
+  <div class="pc" {f0}><span class="ic">1</span><h4>Saber hacer, con rigor</h4><p>Profundiza en los fundamentos y en el estado del arte para aplicarlos a problemas reales</p></div>
+  <div class="pc" {f1}><span class="ic">2</span><h4>Trabajo de grado aplicado</h4><p>Un prototipo funcional, una solución o un modelo implementado</p></div>
+  <div class="pc" {f2}><span class="ic">3</span><h4>Para quienes lideran</h4><p>Profesionales que quieren dirigir proyectos de IA en sus organizaciones</p></div>
 </div>
-<div class="quote" {f2}>Aplicar con rigor el estado del arte para resolver problemas reales: ese es el propósito de este programa</div>
 """.format(f0=frag(0), f1=frag(1), f2=frag(2)),
     notes="", lineas=False)
 
