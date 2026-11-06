@@ -157,6 +157,12 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 .reveal .speaker-notes .clic{color:#009EE2;}
 .reveal .speaker-notes .cue{color:#888;}
 .reveal.show-notes .speaker-notes{max-height:calc(100% - 20px);font-size:16px;}
+
+/* Botones del guion (esquina inferior izquierda) */
+#guion-btns{position:fixed;left:12px;bottom:12px;z-index:50;display:flex;gap:8px;opacity:.35;transition:opacity .2s;}
+#guion-btns:hover{opacity:1;}
+#guion-btns button{font:700 13px Arial,"Liberation Sans",sans-serif;color:#fff;background:#009EE2;border:0;border-radius:6px;padding:7px 12px;cursor:pointer;}
+#guion-btns button.on{background:#000066;}
 </style></head>
 <body><div class="reveal"><div class="slides">
 <section class="mv" data-background-video="videos/Portada_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="#006" data-transition="fade" data-background-transition="fade"><aside class="notes"><p><em class="cue">(Mientras se arma la red y aparece el título.)</em></p><p>Buenas tardes y bienvenidos. Gracias por acompañarnos en esta charla sobre la Maestría en Inteligencia Artificial de EAFIT.</p></aside></section>
@@ -334,6 +340,7 @@ html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
 <aside class="notes"><p>En cuanto a horarios, el programa está pensado para profesionales que trabajan.</p><p>Las clases empiezan el primer fin de semana de marzo de 2027. Las asignaturas obligatorias son los viernes y los sábados; las electivas, entre semana.</p><p><b class="clic">[clic]</b> Cada asignatura obligatoria se desarrolla durante tres fines de semana, <b class="clic">[clic]</b> <b class="clic">[clic]</b> y luego <b class="clic">[clic]</b> empieza la siguiente. No hay clases en Semana Santa ni en los fines de semana festivos.</p></aside></section>
 <section class="st gracias" data-transition="zoom"><img class="photo" src="assets/campus.jpg" alt="Campus EAFIT"><img class="lineas" src="assets/lineas.png" alt=""><div class="thanks"><h1>¡Gracias!</h1><p>Maestría en Inteligencia Artificial</p><p class="small">Universidad EAFIT · Medellín</p></div><aside class="notes"><p>Muchas gracias por su atención. Con gusto respondo sus preguntas.</p><p><em class="cue">(Preguntas frecuentes: requisitos de admisión, costos y financiación, diferencias entre la modalidad presencial y la virtual, homologación desde la especialización y la línea de énfasis, y continuidad hacia el doctorado.)</em></p></aside></section>
 </div></div>
+<div id="guion-btns"><button type="button" id="btn-guion" title="Mostrar u ocultar el guion (tecla N)">Guion</button><button type="button" id="btn-presentador" title="Vista del presentador en otra ventana (tecla S)">Presentador</button></div>
 <script src="reveal/reveal.js"></script>
 <script src="reveal/notes.js"></script>
 <script>
@@ -341,5 +348,8 @@ Reveal.initialize({width:1280,height:720,margin:0,minScale:0.2,maxScale:2,center
   controls:true,progress:true,slideNumber:false,transition:'fade',backgroundTransition:'fade',
   plugins:[RevealNotes],
   // N: muestra u oculta el guion dentro de la misma ventana (útil para ensayar con una sola pantalla)
-  keyboard:{78:function(){Reveal.configure({showNotes:!Reveal.getConfig().showNotes});}}});
+  keyboard:{78:function(){toggleGuion();}}});
+function toggleGuion(){Reveal.configure({showNotes:!Reveal.getConfig().showNotes});document.getElementById('btn-guion').classList.toggle('on',Reveal.getConfig().showNotes);setTimeout(function(){Reveal.layout();},50);setTimeout(function(){Reveal.layout();},400);}
+document.getElementById('btn-guion').onclick=toggleGuion;
+document.getElementById('btn-presentador').onclick=function(){var n=Reveal.getPlugin('notes');if(n)n.open();};
 </script></body></html>

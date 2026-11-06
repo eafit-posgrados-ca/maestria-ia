@@ -353,6 +353,7 @@ def build():
 <body><div class="reveal"><div class="slides">
 {chr(10).join(sections)}
 </div></div>
+<div id="guion-btns"><button type="button" id="btn-guion" title="Mostrar u ocultar el guion (tecla N)">Guion</button><button type="button" id="btn-presentador" title="Vista del presentador en otra ventana (tecla S)">Presentador</button></div>
 <script src="{REVEAL}/reveal.js"></script>
 <script src="{REVEAL}/notes.js"></script>
 <script>
@@ -360,7 +361,10 @@ Reveal.initialize({{width:1280,height:720,margin:0,minScale:0.2,maxScale:2,cente
   controls:true,progress:true,slideNumber:false,transition:'fade',backgroundTransition:'fade',
   plugins:[RevealNotes],
   // N: muestra u oculta el guion dentro de la misma ventana (útil para ensayar con una sola pantalla)
-  keyboard:{{78:function(){{Reveal.configure({{showNotes:!Reveal.getConfig().showNotes}});}}}}}});
+  keyboard:{{78:function(){{toggleGuion();}}}}}});
+function toggleGuion(){{Reveal.configure({{showNotes:!Reveal.getConfig().showNotes}});document.getElementById('btn-guion').classList.toggle('on',Reveal.getConfig().showNotes);setTimeout(function(){{Reveal.layout();}},50);setTimeout(function(){{Reveal.layout();}},400);}}
+document.getElementById('btn-guion').onclick=toggleGuion;
+document.getElementById('btn-presentador').onclick=function(){{var n=Reveal.getPlugin('notes');if(n)n.open();}};
 </script></body></html>"""
     (DIST / "index.html").write_text(html, encoding="utf-8")
     print("OK ->", DIST / "index.html", "|", len(sections), "secciones")

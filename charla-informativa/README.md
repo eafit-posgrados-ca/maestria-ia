@@ -42,6 +42,14 @@ El discurso completo está en `guion.md`, un bloque `## CLAVE` por cada paso de 
 `build_deck.py` lo inserta como notas del presentador, así que se ve con la tecla `S`.
 Para cambiarlo: editar `guion.md` y ejecutar `python build_deck.py && python build_onefile.py` (no hay que volver a renderizar las animaciones).
 
+## Charla virtual (compartiendo pantalla, como en PowerPoint)
+
+1. Abrir la presentación y hacer clic en **Presentador** (o tecla `S`): se abre una ventana aparte con la diapositiva siguiente, el cronómetro y el guion.
+2. En Teams, Zoom o Meet, compartir **solo la ventana del navegador con las diapositivas** (no la pantalla completa).
+3. Dejar la ventana del presentador para uno mismo: el público no la ve. Se avanza desde cualquiera de las dos ventanas.
+
+Con una sola pantalla, colocar las dos ventanas lado a lado. Para ensayar basta el botón **Guion** (o tecla `N`).
+
 ## Durante la presentación
 
 - `→` / `espacio`: siguiente paso (las diapositivas fijas revelan sus elementos en orden).
