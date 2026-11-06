@@ -7,7 +7,9 @@ Uso:
     manim-slides render -qh maestria_ia.py Portada CicloIA Recorrido PlanEstudios
     python build_deck.py            # genera dist/index.html
 """
+import html
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -70,11 +72,11 @@ CONTEXTO = static("""
 PREGUNTAS = static("""
 <h2>Las preguntas que hoy se hacen las organizaciones</h2>
 <div class="qa">
-  <div class="q" {q0}>¿Qué modelo uso?</div><div class="a" {a0}><strong>Aprendizaje automático:</strong> generalización, métricas, sesgo y varianza</div>
-  <div class="q" {q1}>¿Cómo sé que funciona en mi caso?</div><div class="a" {a1}><strong>Estadística:</strong> diseño de evaluaciones, incertidumbre y comparación rigurosa</div>
-  <div class="q" {q2}>¿Por qué falla y cómo lo mejoro?</div><div class="a" {a2}><strong>Aprendizaje profundo y optimización:</strong> entender el modelo para adaptarlo</div>
-  <div class="q" {q3}>¿Cómo decide un agente qué hacer?</div><div class="a" {a3}><strong>Fundamentos de IA:</strong> búsqueda, planificación y razonamiento</div>
-  <div class="q" {q4}>¿Qué pasó en cada paso y cuánto costó?</div><div class="a" {a4}><strong>Operaciones en datos e IA:</strong> trazas, evaluaciones continuas y LLMOps</div>
+  <div class="q" {q0}>¿Qué modelo uso?</div><div class="a" {a0}><span><strong>Aprendizaje automático:</strong> generalización, métricas, sesgo y varianza</span></div>
+  <div class="q" {q1}>¿Cómo sé que funciona en mi caso?</div><div class="a" {a1}><span><strong>Estadística:</strong> diseño de evaluaciones, incertidumbre y comparación rigurosa</span></div>
+  <div class="q" {q2}>¿Por qué falla y cómo lo mejoro?</div><div class="a" {a2}><span><strong>Aprendizaje profundo y optimización:</strong> entender el modelo para adaptarlo</span></div>
+  <div class="q" {q3}>¿Cómo decide un agente qué hacer?</div><div class="a" {a3}><span><strong>Fundamentos de IA:</strong> búsqueda, planificación y razonamiento</span></div>
+  <div class="q" {q4}>¿Qué pasó en cada paso y cuánto costó?</div><div class="a" {a4}><span><strong>Operaciones en datos e IA:</strong> trazas, evaluaciones continuas y LLMOps</span></div>
 </div>
 <div class="quote center" {fz}>Usar IA es fácil. <strong>Hacerla confiable exige fundamentos.</strong></div>
 """.format(**{f"q{i}": frag(2 * i) for i in range(5)}, **{f"a{i}": frag(2 * i + 1) for i in range(5)}, fz=frag(10)),
@@ -236,27 +238,70 @@ GRACIAS = (f'<section class="st gracias" data-transition="zoom">'
 # Orden de la presentación
 # ---------------------------------------------------------------------------
 ORDER = [
-    ("scene", "Portada"),
-    ("html", CONTACTO),
-    ("scene", "DosEpocas"),
-    ("html", PREGUNTAS),
-    ("scene", "CicloIA"),
-    ("scene", "ElegirModelo"),
-    ("html", EVOLUCION),
-    ("html", GENERALIDADES),
-    ("html", PORQUE),
-    ("scene", "Recorrido"),
-    ("scene", "PlanEstudios"),
-    ("html", ELECTIVAS),
-    ("html", DIFERENCIALES),
-    ("html", PERFILES),
-    ("html", TRABAJO),
-    ("html", HORARIOS),
-    ("html", GRACIAS),
+    ("scene", "Portada", None),
+    ("html", "CONTACTO", CONTACTO),
+    ("scene", "DosEpocas", None),
+    ("html", "PREGUNTAS", PREGUNTAS),
+    ("scene", "CicloIA", None),
+    ("scene", "ElegirModelo", None),
+    ("html", "EVOLUCION", EVOLUCION),
+    ("html", "GENERALIDADES", GENERALIDADES),
+    ("html", "PORQUE", PORQUE),
+    ("scene", "Recorrido", None),
+    ("scene", "PlanEstudios", None),
+    ("html", "ELECTIVAS", ELECTIVAS),
+    ("html", "DIFERENCIALES", DIFERENCIALES),
+    ("html", "PERFILES", PERFILES),
+    ("html", "TRABAJO", TRABAJO),
+    ("html", "HORARIOS", HORARIOS),
+    ("html", "GRACIAS", GRACIAS),
 ]
 
 
-def scene_sections(name):
+
+# ---------------------------------------------------------------------------
+# Guion: notas del presentador desde guion.md
+# ---------------------------------------------------------------------------
+def load_guion(path=ROOT / "guion.md"):
+    """Bloques '## CLAVE' -> HTML de notas. Claves: nombre de diapositiva fija o Escena.N."""
+    if not path.exists():
+        return {}
+    blocks, key, buf = {}, None, []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^##\s+(\S+)\s*$", line)
+        if m:
+            if key:
+                blocks[key] = buf
+            key, buf = m.group(1), []
+        elif key:
+            buf.append(line)
+    if key:
+        blocks[key] = buf
+
+    def to_html(lines):
+        paras = [p.strip() for p in "\n".join(lines).split("\n\n") if p.strip()]
+        out = []
+        for p in paras:
+            p = html.escape(p.replace("\n", " "), quote=False)
+            p = re.sub(r"\*\((.+?)\)\*", r'<em class="cue">(\1)</em>', p)
+            p = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", p)
+            p = p.replace("[clic]", '<b class="clic">[clic]</b>')
+            out.append(f"<p>{p}</p>")
+        return "".join(out)
+
+    return {k: to_html(v) for k, v in blocks.items()}
+
+
+def with_notes(section_html, notes_html):
+    if not notes_html:
+        return section_html
+    aside = f'<aside class="notes">{notes_html}</aside>'
+    if '<aside class="notes">' in section_html:
+        return re.sub(r'<aside class="notes">.*?</aside>', lambda m: aside, section_html, flags=re.S)
+    return section_html.replace("</section>", aside + "</section>", 1)
+
+
+def scene_sections(name, guion=None):
     jf = ROOT / "slides" / f"{name}.json"
     if not jf.exists() or not all((ROOT / x["file"]).exists() for x in json.loads(jf.read_text())["slides"]):
         print("  (falta la escena", name, ")")
@@ -277,7 +322,8 @@ def scene_sections(name):
             attrs += ['data-transition="none"', 'data-background-transition="none"']
         else:
             attrs += ['data-transition="fade"', 'data-background-transition="fade"']
-        notes = f'<aside class="notes">{s["notes"]}</aside>' if s["notes"] else ""
+        txt = (guion or {}).get(f"{name}.{i}") or s["notes"]
+        notes = f'<aside class="notes">{txt}</aside>' if txt else ""
         out.append(f'<section class="mv" {" ".join(attrs)}>{notes}</section>')
     return out
 
@@ -295,8 +341,9 @@ def build():
     shutil.copy(ROOT / "vendor/reveal/dist/reveal.js", DIST / "reveal/reveal.js")
     shutil.copy(ROOT / "vendor/reveal/plugin/notes/notes.js", DIST / "reveal/notes.js")
     sections = []
-    for kind, v in ORDER:
-        sections += scene_sections(v) if kind == "scene" else [v]
+    guion = load_guion()
+    for kind, key, v in ORDER:
+        sections += scene_sections(key, guion) if kind == "scene" else [with_notes(v, guion.get(key))]
     html = f"""<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
