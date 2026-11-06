@@ -153,7 +153,7 @@ GENERALIDADES = static("""
 </div>
 <p class="foot">Inicio de clases: marzo de 2027 · Medellín</p>
 """.format(f0=frag(0), f1=frag(1)),
-    notes="Tres semestres, 36 créditos, presencial y virtual con el mismo plan de estudios.", lineas=False)
+    notes="Tres semestres, 36 créditos, modalidad presencial en Medellín.", lineas=False)
 
 PORQUE = static("""
 <h2>¿Por qué esta maestría?</h2>
@@ -192,7 +192,7 @@ DIFERENCIALES = static("""
   <li {f4}><strong>Conexión con el entorno:</strong> retos con empresas y créditos de nube en AWS, Google Cloud y Azure</li>
   <li {f5}><strong>Microcredenciales:</strong> Fundamentos de IA, Aprendizaje profundo, PLN e IA generativa conforman la Credencial en IA</li>
 </ul>
-<div class="quote" {f6}>La primera maestría en IA de una universidad antioqueña: presencial en Medellín y virtual en todo el país</div>
+<div class="quote" {f6}>La primera maestría en IA de una universidad antioqueña, presencial en Medellín</div>
 """.format(**{f"f{i}": frag(i) for i in range(7)}),
     notes="Lo que nos diferencia: trayectoria, flexibilidad, práctica, profesores e integración con el ecosistema.")
 

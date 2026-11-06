@@ -239,7 +239,7 @@ Las electivas permiten que cada estudiante oriente su formación según sus inte
 
 [clic] Y microcredenciales: Fundamentos de IA, Aprendizaje profundo, Procesamiento de lenguaje natural e IA generativa conforman la Credencial en Inteligencia Artificial.
 
-[clic] Y algo que nos importa: sería la primera maestría en IA de una universidad antioqueña, presencial en Medellín y virtual en todo el país.
+[clic] Y algo que nos importa: sería la primera maestría en IA de una universidad antioqueña, presencial en Medellín.
 
 ## PERFILES
 ¿Para quién es?
@@ -267,4 +267,4 @@ Las clases empiezan el primer fin de semana de marzo de 2027. Las asignaturas ob
 ## GRACIAS
 Muchas gracias por su atención. Con gusto respondo sus preguntas.
 
-*(Preguntas frecuentes: requisitos de admisión, costos y financiación, diferencias entre la modalidad presencial y la virtual, homologación desde la especialización y la línea de énfasis, y continuidad hacia el doctorado.)*
+*(Preguntas frecuentes: requisitos de admisión, costos y financiación, si habrá oferta virtual (por ahora solo presencial), homologación desde la especialización y la línea de énfasis, y continuidad hacia el doctorado.)*
