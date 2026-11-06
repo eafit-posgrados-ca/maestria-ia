@@ -352,7 +352,24 @@ def build():
     (DIST / "reveal").mkdir()
     shutil.copy(ROOT / "vendor/reveal/dist/reveal.css", DIST / "reveal/reveal.css")
     shutil.copy(ROOT / "vendor/reveal/dist/reveal.js", DIST / "reveal/reveal.js")
-    shutil.copy(ROOT / "vendor/reveal/plugin/notes/notes.js", DIST / "reveal/notes.js")
+    # Vista del presentador: el guion ocupa la mayor parte de la ventana
+    notes_js = (ROOT / "vendor/reveal/plugin/notes/notes.js").read_text(encoding="utf-8")
+    speaker_css = (
+        "<style>"
+        "body[data-speaker-layout=\\\"default\\\"] #current-slide{width:36%!important;height:40%!important;left:0!important;top:0!important;}"
+        "body[data-speaker-layout=\\\"default\\\"] #upcoming-slide{width:36%!important;height:36%!important;left:0!important;top:42%!important;}"
+        "body[data-speaker-layout=\\\"default\\\"] #speaker-controls{left:36%!important;top:0!important;width:64%!important;height:100%!important;font-size:16px!important;}"
+        ".speaker-controls-notes{font-size:23px!important;line-height:1.5!important;}"
+        ".speaker-controls-notes .value p{margin:0 0 14px;}"
+        ".speaker-controls-notes .clic{color:#009EE2;}"
+        ".speaker-controls-notes .cue{color:#8a8a8a;font-size:.85em;}"
+        ".speaker-controls-notes .num{color:#000066;font-size:.8em;}"
+        "#speaker-layout{top:auto!important;bottom:8px!important;right:auto!important;left:8px!important;}"
+        "</style>"
+    )
+    assert "</style>\\n\\t</head>" in notes_js, "plantilla de notas inesperada"
+    notes_js = notes_js.replace("</style>\\n\\t</head>", "</style>" + speaker_css + "\\n\\t</head>", 1)
+    (DIST / "reveal/notes.js").write_text(notes_js, encoding="utf-8")
     sections = []
     guion = load_guion()
     total = len(ORDER)
@@ -383,6 +400,7 @@ Reveal.initialize({{width:1280,height:720,margin:0,minScale:0.2,maxScale:2,cente
   keyboard:{{78:function(){{toggleGuion();}}}}}});
 function toggleGuion(){{Reveal.configure({{showNotes:!Reveal.getConfig().showNotes}});document.getElementById('btn-guion').classList.toggle('on',Reveal.getConfig().showNotes);setTimeout(function(){{Reveal.layout();}},50);setTimeout(function(){{Reveal.layout();}},400);}}
 document.getElementById('btn-guion').onclick=toggleGuion;
+if(window.self!==window.top){{document.getElementById('guion-btns').style.display='none';}}
 function numDia(){{var s=Reveal.getCurrentSlide();var n=s&&s.getAttribute('data-num');
   document.getElementById('num-dia').textContent=(n&&n!=='1')?(n+' / {total}'):'';}}
 Reveal.on('ready',numDia);Reveal.on('slidechanged',numDia);

@@ -393,6 +393,7 @@ Reveal.initialize({width:1280,height:720,margin:0,minScale:0.2,maxScale:2,center
   keyboard:{78:function(){toggleGuion();}}});
 function toggleGuion(){Reveal.configure({showNotes:!Reveal.getConfig().showNotes});document.getElementById('btn-guion').classList.toggle('on',Reveal.getConfig().showNotes);setTimeout(function(){Reveal.layout();},50);setTimeout(function(){Reveal.layout();},400);}
 document.getElementById('btn-guion').onclick=toggleGuion;
+if(window.self!==window.top){document.getElementById('guion-btns').style.display='none';}
 function numDia(){var s=Reveal.getCurrentSlide();var n=s&&s.getAttribute('data-num');
   document.getElementById('num-dia').textContent=(n&&n!=='1')?(n+' / 17'):'';}
 Reveal.on('ready',numDia);Reveal.on('slidechanged',numDia);

@@ -44,7 +44,7 @@ Para cambiarlo: editar `guion.md` y ejecutar `python build_deck.py && python bui
 
 ## Charla virtual (compartiendo pantalla, como en PowerPoint)
 
-1. Abrir la presentación y hacer clic en **Presentador** (o tecla `S`): se abre una ventana aparte con la diapositiva siguiente, el cronómetro y el guion.
+1. Abrir la presentación y hacer clic en **Presentador** (o tecla `S`): se abre una ventana aparte donde el guion ocupa la mayor parte, con la diapositiva actual, la siguiente y el cronómetro a la izquierda. Si se quiere solo el guion, elegir *Notes only* en el selector de abajo a la izquierda.
 2. En Teams, Zoom o Meet, compartir **solo la ventana del navegador con las diapositivas** (no la pantalla completa).
 3. Dejar la ventana del presentador para uno mismo: el público no la ve. Se avanza desde cualquiera de las dos ventanas.
 
