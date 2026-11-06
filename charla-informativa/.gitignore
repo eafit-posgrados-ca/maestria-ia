@@ -1,0 +1,5 @@
+# salidas de render de Manim (se regeneran)
+media/
+slides/
+__pycache__/
+qa/

@@ -1,0 +1,321 @@
+"""
+Ensambla la presentación completa (reveal.js):
+  - escenas animadas renderizadas con Manim Slides (videos de fondo, con bucles)
+  - diapositivas HTML fijas con el formato EAFIT
+
+Uso:
+    manim-slides render -qh maestria_ia.py Portada CicloIA Recorrido PlanEstudios
+    python build_deck.py            # genera dist/index.html
+"""
+import json
+import shutil
+from pathlib import Path
+
+ROOT = Path(__file__).parent
+DIST = ROOT / "dist"
+REVEAL = "reveal"  # copia local de reveal.js 5.1.0 (funciona sin internet)
+
+NAVY, CYAN = "#000066", "#009EE2"
+
+# ---------------------------------------------------------------------------
+# Piezas comunes
+# ---------------------------------------------------------------------------
+def band(label="Maestría en Inteligencia Artificial"):
+    return f'<div class="band">{label}</div>'
+
+LOGO = '<img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT">'
+LINEAS = '<img class="lineas" src="assets/lineas.png" alt="">'
+
+
+def static(body, notes="", cls="", transition="fade", band_label="Maestría en Inteligencia Artificial",
+           logo=True, lineas=True):
+    chrome = band(band_label) if band_label else ""
+    chrome += LOGO if logo else ""
+    chrome += LINEAS if lineas else ""
+    return (f'<section class="st {cls}" data-transition="{transition}">{chrome}{body}'
+            f'<aside class="notes">{notes}</aside></section>')
+
+
+def frag(i):
+    return f'class="fragment fade-up" data-fragment-index="{i}"'
+
+
+# ---------------------------------------------------------------------------
+# Diapositivas fijas
+# ---------------------------------------------------------------------------
+CONTACTO = static("""
+<div class="contact">
+  <div class="person">
+    <h3>Juan David Martínez Vargas, Ph.D.</h3>
+    <p class="role">Profesor gestor del programa</p>
+    <p>Área de Computación y Analítica</p>
+    <p>Escuela de Ciencias Aplicadas e Ingeniería</p>
+  </div>
+</div>""", notes="Presentación del equipo del programa.", band_label="", lineas=True)
+
+CONTEXTO = static("""
+<h2>La inteligencia artificial hoy</h2>
+<div class="stats">
+  <div class="stat" {f0}><span class="num">78 %</span><span class="lbl">de las organizaciones adoptó IA en 2024 <em>(55 % en 2023)</em></span></div>
+  <div class="stat" {f1}><span class="num">40 %</span><span class="lbl">de los empleos se verá impactado por la IA</span></div>
+  <div class="stat" {f2}><span class="num">70 %</span><span class="lbl">de los empleadores busca perfiles en datos e IA</span></div>
+  <div class="stat hi" {f3}><span class="num">12 %</span><span class="lbl">de los profesionales TI tiene realmente las habilidades, aunque el 81 % cree que puede usar IA</span></div>
+</div>
+<div class="quote" {f4}>El mercado no demanda solo expertos técnicos: necesita <strong>líderes que integren la IA</strong> con criterio estratégico, ético y organizacional</div>
+<p class="src">Fuentes: WEF, Future of Jobs Report 2025; estudio de mercado de la Dirección de Estrategia, EAFIT</p>
+""".format(f0=frag(0), f1=frag(1), f2=frag(2), f3=frag(3), f4=frag(4)),
+    notes="La adopción de IA es masiva, pero la brecha de habilidades es enorme: ahí está la oportunidad.",
+    band_label="Contexto")
+
+PREGUNTAS = static("""
+<h2>Las preguntas que hoy se hacen las organizaciones</h2>
+<div class="qa">
+  <div class="q" {q0}>¿Qué modelo uso?</div><div class="a" {a0}><strong>Aprendizaje automático:</strong> generalización, métricas, sesgo y varianza</div>
+  <div class="q" {q1}>¿Cómo sé que funciona en mi caso?</div><div class="a" {a1}><strong>Estadística:</strong> diseño de evaluaciones, incertidumbre y comparación rigurosa</div>
+  <div class="q" {q2}>¿Por qué falla y cómo lo mejoro?</div><div class="a" {a2}><strong>Aprendizaje profundo y optimización:</strong> entender el modelo para adaptarlo</div>
+  <div class="q" {q3}>¿Cómo decide un agente qué hacer?</div><div class="a" {a3}><strong>Fundamentos de IA:</strong> búsqueda, planificación y razonamiento</div>
+  <div class="q" {q4}>¿Qué pasó en cada paso y cuánto costó?</div><div class="a" {a4}><strong>Operaciones en datos e IA:</strong> trazas, evaluaciones continuas y LLMOps</div>
+</div>
+<div class="quote center" {fz}>Usar IA es fácil. <strong>Hacerla confiable exige fundamentos.</strong></div>
+""".format(**{f"q{i}": frag(2 * i) for i in range(5)}, **{f"a{i}": frag(2 * i + 1) for i in range(5)}, fz=frag(10)),
+    notes="Cada pregunta la responde una base que enseñamos; las asignaturas aparecen luego en el plan de estudios. "
+          "Si preguntan por el contexto: Colombia tiene una Política Nacional de IA (CONPES 4144) con la formación de talento como eje, "
+          "y esta sería la primera maestría en IA de una universidad antioqueña.",
+    band_label="Contexto", lineas=False)
+
+EVOLUCION = static("""
+<h2>Evolución del perfil en inteligencia artificial</h2>
+<div class="evo">
+  <div class="col">
+    <div class="tag">FORMACIÓN BASE</div>
+    <ul>
+      <li>Programación en Python</li><li>Matemáticas y estadística</li>
+      <li>Análisis de datos</li><li>Entrenamiento de modelos clásicos</li>
+    </ul>
+  </div>
+  <div class="arrow">➜</div>
+  <div class="col strong">
+    <div class="tag">EVOLUCIÓN REQUERIDA</div>
+    <ul>
+      <li {f0}>Aprendizaje profundo, visión y PLN</li>
+      <li {f1}>IA generativa y <strong>agentes</strong></li>
+      <li {f2}><strong>Selección y adaptación</strong> de modelos fundacionales</li>
+      <li {f3}><strong>Evaluaciones</strong> rigurosas (evals)</li>
+      <li {f4}>LLMOps: <strong>trazas</strong>, costos y observabilidad</li>
+      <li {f5}>Ética, gobernanza y liderazgo de proyectos de IA</li>
+    </ul>
+  </div>
+</div>
+<div class="quote">El valor ya no está solo en entrenar modelos, sino en elegir, adaptar, evaluar y operar el adecuado</div>
+""".format(**{f"f{i}": frag(i) for i in range(6)}),
+    notes="El profesional en IA hoy decide qué modelo usar, lo adapta, lo evalúa y lo opera con trazabilidad, cada vez más en forma de agentes.")
+
+GENERALIDADES = static("""
+<h2>Generalidades de la maestría</h2>
+<div class="cards6">
+  <div class="card" {f0}><div class="h">Denominación</div><div class="b">Maestría en Inteligencia Artificial</div></div>
+  <div class="card" {f0}><div class="h">Título a otorgar</div><div class="b">Magíster en Inteligencia Artificial</div></div>
+  <div class="card" {f0}><div class="h">Modalidades</div><div class="b">Presencial y virtual *</div></div>
+  <div class="card" {f1}><div class="h">Duración</div><div class="b">3 semestres</div></div>
+  <div class="card" {f1}><div class="h">Créditos</div><div class="b">36 créditos</div></div>
+  <div class="card" {f1}><div class="h">Admisión</div><div class="b">Semestral</div></div>
+</div>
+<p class="foot">* Mismo plan de estudios en ambas modalidades · Inicio de clases: marzo de 2027</p>
+""".format(f0=frag(0), f1=frag(1)),
+    notes="Tres semestres, 36 créditos, presencial y virtual con el mismo plan de estudios.", lineas=False)
+
+PORQUE = static("""
+<h2>¿Por qué esta maestría?</h2>
+<div class="quote lead">Formamos líderes capaces de <strong>diseñar, integrar y escalar sistemas de IA responsables</strong>, desde el modelo hasta el despliegue</div>
+<div class="rows">
+  <div class="row" {f0}><span class="ic">1</span><div><strong>Agentes de principio a fin:</strong> desde los agentes clásicos en Fundamentos de IA hasta agentes con LLM en producción</div></div>
+  <div class="row" {f1}><span class="ic">2</span><div><strong>El ciclo actual de la IA:</strong> seleccionar, adaptar, evaluar y observar modelos con MLOps y LLMOps</div></div>
+  <div class="row" {f2}><span class="ic">3</span><div><strong>Rigor matemático aplicado</strong> y aprender haciendo con proyectos integradores y retos reales</div></div>
+  <div class="row" {f3}><span class="ic">4</span><div><strong>IA responsable:</strong> ética, integridad y gobernanza como eje transversal</div></div>
+</div>
+<p class="tagline" {f4}>No se trata solo de usar IA, sino de diseñar, evaluar y liderar soluciones completas</p>
+""".format(**{f"f{i}": frag(i) for i in range(5)}),
+    notes="Ya vimos el contexto y el ciclo de vida. Ahora, qué formación permite desarrollar estas capacidades.",
+    lineas=False)
+
+ELECTIVAS = static("""
+<h2>Asignaturas electivas</h2>
+<div class="groups">
+  <div class="grp" {f0}><h4>Matemáticas y estadística</h4><ul><li>Estadística avanzada</li><li>Optimización</li><li>Métodos numéricos</li></ul></div>
+  <div class="grp" {f1}><h4>Desarrollo de software</h4><ul><li>Computación en la nube</li><li>Desarrollo de software para IA</li></ul></div>
+  <div class="grp" {f2}><h4>Procesamiento y visualización de datos</h4><ul><li>Visualización de datos</li><li>Almacenamiento y procesamiento de grandes datos</li></ul></div>
+  <div class="grp" {f3}><h4>Electivas del ecosistema</h4><ul><li>Asignaturas de la Maestría en Ciencias de los Datos y Analítica</li><li>Otros posgrados de la Escuela</li></ul></div>
+</div>
+<div class="bottomband">El estudiante cursa una electiva por semestre y <strong>Formación en integridad</strong> (3 créditos)</div>
+""".format(**{f"f{i}": frag(i) for i in range(4)}),
+    notes="Las electivas permiten orientar la formación: más matemáticas, más software o más datos.", lineas=False)
+
+DIFERENCIALES = static("""
+<h2>Diferenciales del programa</h2>
+<ul class="diff">
+  <li {f0}><strong>Trayectoria académica:</strong> articulación con el Sistema Metro, desde la línea de énfasis en pregrado hasta el doctorado</li>
+  <li {f1}><strong>Currículo flexible:</strong> 9 créditos electivos (25 %), incluida Formación en integridad</li>
+  <li {f2}><strong>Aprendizaje práctico:</strong> proyectos integradores en el primer y el segundo semestre</li>
+  <li {f3}><strong>Docentes de planta con doctorado</strong> e investigación en grupos A1 de Minciencias</li>
+  <li {f4}><strong>IA actual:</strong> agentes, evaluaciones y LLMOps integrados al plan de estudios</li>
+  <li {f4}><strong>Conexión con el entorno:</strong> retos con empresas y créditos de nube en AWS, Google Cloud y Azure</li>
+  <li {f5}><strong>Microcredenciales:</strong> Fundamentos de IA, Aprendizaje profundo, PLN e IA generativa conforman la Credencial en IA</li>
+</ul>
+<div class="quote" {f6}>La primera maestría en IA de una universidad antioqueña: presencial en Medellín y virtual en todo el país</div>
+""".format(**{f"f{i}": frag(i) for i in range(7)}),
+    notes="Lo que nos diferencia: trayectoria, flexibilidad, práctica, profesores e integración con el ecosistema.")
+
+PERFILES = static("""
+<h2>Perfiles del programa</h2>
+<div class="profiles">
+  <div class="pf" {f0}><h4>Perfil de ingreso</h4>
+    <p>Profesional de ciencias, ingenierías, finanzas, administración, economía o áreas afines, con conocimientos en matemáticas, estadística y computación, interesado en <strong>liderar</strong> el desarrollo de productos y servicios innovadores basados en IA.</p>
+    <div class="pill">Base cuantitativa</div></div>
+  <div class="pf" {f1}><h4>Perfil de egreso</h4>
+    <p>Diseña soluciones a problemas complejos de diversos sectores mediante la construcción, optimización y evaluación crítica de modelos de IA, y lidera proyectos de desarrollo tecnológico con sostenibilidad, rigor científico y responsabilidad ética.</p>
+    <div class="pill">Capacidad de diseñar soluciones de IA</div></div>
+  <div class="pf" {f2}><h4>Perfil ocupacional</h4>
+    <p>Gestor de proyectos de IA, arquitecto o ingeniero de soluciones de IA y consultor estratégico en IA, en la industria, el sector público y organizaciones de distintos sectores.</p>
+    <div class="pill">Roles en la industria</div></div>
+</div>
+""".format(**{f"f{i}": frag(i) for i in range(3)}),
+    notes="Dirigido a profesionales con base cuantitativa que quieren liderar soluciones de IA.", lineas=False)
+
+TRABAJO = static("""
+<h2>Trabajo de grado y actividades</h2>
+<div class="split">
+  <div>
+    <h4 class="sub">Modalidades de trabajo de grado (6 créditos)</h4>
+    <div class="mods">
+      <div class="mod" {f0}><strong>Proyecto aplicado</strong><span>Solución a un problema con dominio del estado del arte</span></div>
+      <div class="mod" {f0}><strong>Artículo en revista indexada</strong><span>En coautoría con el director</span></div>
+      <div class="mod" {f0}><strong>Caso de estudio aplicado</strong><span>Problema real o hipotético con datos y método analítico</span></div>
+      <div class="mod" {f0}><strong>Pasantía</strong><span>En un grupo de investigación, de 3 a 6 meses</span></div>
+    </div>
+  </div>
+  <div>
+    <h4 class="sub">Actividades</h4>
+    <ul class="acts">
+      <li {f1}>Charlas con expertos de la industria</li>
+      <li {f1}>Retos y competencias de IA</li>
+      <li {f1}>Proyectos con empresas, ONG y entidades públicas</li>
+      <li {f1}>Seminarios sobre tendencias en IA</li>
+    </ul>
+  </div>
+</div>
+""".format(f0=frag(0), f1=frag(1)),
+    notes="El resultado esperado es saber hacer: un prototipo, una solución o un modelo implementado.")
+
+HORARIOS = static("""
+<h2>Horarios (modalidad presencial)</h2>
+<ul class="diff tight">
+  <li>Clases en horarios compatibles con la vida laboral</li>
+  <li>Sesiones sincrónicas y actividades asincrónicas (si aplica)</li>
+  <li><strong>Inicio de clases:</strong> primer fin de semana de marzo de 2027</li>
+  <li><strong>Asignaturas obligatorias:</strong> viernes y sábados</li>
+  <li><strong>Asignaturas electivas:</strong> entre semana, en paralelo con las obligatorias</li>
+</ul>
+<div class="weeks">
+  <div class="wk-lbl">Una asignatura obligatoria = 3 fines de semana</div>
+  <div class="wk-row">
+    <div class="wk fragment fade-right" data-fragment-index="0"><span>Fin de semana 1</span><b>Vie · Sáb</b></div>
+    <div class="wk fragment fade-right" data-fragment-index="1"><span>Fin de semana 2</span><b>Vie · Sáb</b></div>
+    <div class="wk fragment fade-right" data-fragment-index="2"><span>Fin de semana 3</span><b>Vie · Sáb</b></div>
+    <div class="wk next fragment fade-right" data-fragment-index="3"><span>Siguiente asignatura</span><b>→</b></div>
+  </div>
+</div>
+""", notes="Pensado para profesionales que trabajan. No hay clases en Semana Santa ni fines de semana festivos.")
+
+GRACIAS = (f'<section class="st gracias" data-transition="zoom">'
+           f'<img class="photo" src="assets/campus.jpg" alt="Campus EAFIT">{LINEAS}'
+           f'<div class="thanks"><h1>¡Gracias!</h1><p>Maestría en Inteligencia Artificial</p>'
+           f'<p class="small">Universidad EAFIT · Medellín</p></div>'
+           f'<aside class="notes">Cierre e invitación a preguntas.</aside></section>')
+
+# ---------------------------------------------------------------------------
+# Orden de la presentación
+# ---------------------------------------------------------------------------
+ORDER = [
+    ("scene", "Portada"),
+    ("html", CONTACTO),
+    ("scene", "DosEpocas"),
+    ("html", PREGUNTAS),
+    ("scene", "CicloIA"),
+    ("scene", "ElegirModelo"),
+    ("html", EVOLUCION),
+    ("html", GENERALIDADES),
+    ("html", PORQUE),
+    ("scene", "Recorrido"),
+    ("scene", "PlanEstudios"),
+    ("html", ELECTIVAS),
+    ("html", DIFERENCIALES),
+    ("html", PERFILES),
+    ("html", TRABAJO),
+    ("html", HORARIOS),
+    ("html", GRACIAS),
+]
+
+
+def scene_sections(name):
+    jf = ROOT / "slides" / f"{name}.json"
+    if not jf.exists() or not all((ROOT / x["file"]).exists() for x in json.loads(jf.read_text())["slides"]):
+        print("  (falta la escena", name, ")")
+        return [f'<section class="st"><h2>[{name}]</h2></section>']
+    cfg = json.loads((ROOT / "slides" / f"{name}.json").read_text())
+    bg = cfg.get("background_color", "#ffffff")
+    out = []
+    for i, s in enumerate(cfg["slides"]):
+        src = ROOT / s["file"]
+        dst = DIST / "videos" / f"{name}_{i:02d}.mp4"
+        shutil.copy(src, dst)
+        attrs = [f'data-background-video="videos/{dst.name}"', "data-background-video-muted",
+                 'data-background-size="contain"', f'data-background-color="{bg}"']
+        if s["loop"]:
+            attrs.append("data-background-video-loop")
+        # continuidad dentro de la escena: sin transición
+        if i > 0:
+            attrs += ['data-transition="none"', 'data-background-transition="none"']
+        else:
+            attrs += ['data-transition="fade"', 'data-background-transition="fade"']
+        notes = f'<aside class="notes">{s["notes"]}</aside>' if s["notes"] else ""
+        out.append(f'<section class="mv" {" ".join(attrs)}>{notes}</section>')
+    return out
+
+
+CSS = (ROOT / "deck.css").read_text()
+
+
+def build():
+    if DIST.exists():
+        shutil.rmtree(DIST)
+    (DIST / "videos").mkdir(parents=True)
+    shutil.copytree(ROOT / "assets", DIST / "assets")
+    (DIST / "reveal").mkdir()
+    shutil.copy(ROOT / "vendor/reveal/dist/reveal.css", DIST / "reveal/reveal.css")
+    shutil.copy(ROOT / "vendor/reveal/dist/reveal.js", DIST / "reveal/reveal.js")
+    shutil.copy(ROOT / "vendor/reveal/plugin/notes/notes.js", DIST / "reveal/notes.js")
+    sections = []
+    for kind, v in ORDER:
+        sections += scene_sections(v) if kind == "scene" else [v]
+    html = f"""<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestría en IA EAFIT</title>
+<link rel="stylesheet" href="{REVEAL}/reveal.css">
+<style>{CSS}</style></head>
+<body><div class="reveal"><div class="slides">
+{chr(10).join(sections)}
+</div></div>
+<script src="{REVEAL}/reveal.js"></script>
+<script src="{REVEAL}/notes.js"></script>
+<script>
+Reveal.initialize({{width:1280,height:720,margin:0,minScale:0.2,maxScale:2,center:false,hash:true,
+  controls:true,progress:true,slideNumber:false,transition:'fade',backgroundTransition:'fade',
+  plugins:[RevealNotes]}});
+</script></body></html>"""
+    (DIST / "index.html").write_text(html, encoding="utf-8")
+    print("OK ->", DIST / "index.html", "|", len(sections), "secciones")
+
+
+if __name__ == "__main__":
+    build()

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestría en IA EAFIT</title>
+<link rel="stylesheet" href="reveal/reveal.css">
+<style>:root{--navy:#000066;--cyan:#009EE2;--light:#76D6FF;--pale:#E5F5FC;--gray:#A6A6A6;--ink:#1A2431;}
+html,body{background:#fff;}
+.reveal{font-family:Arial,"Liberation Sans",Helvetica,sans-serif;color:var(--ink);}
+.reveal .slides{text-align:left;}
+.reveal .slides section{width:1280px;height:720px;padding:0;box-sizing:border-box;}
+.reveal .slides section.st{background:#fff;}
+.st .band{position:absolute;left:0;top:0;width:783px;height:45px;background:var(--cyan);color:#fff;
+  font-weight:700;font-size:18px;line-height:45px;padding-left:22px;box-sizing:border-box;}
+.st .logo{position:absolute;right:42px;top:40px;width:140px;margin:0;}
+.st .lineas{position:absolute;right:-18px;bottom:-30px;height:200px;margin:0;}
+.st h2{position:absolute;left:54px;top:82px;margin:0;font-size:38px;font-weight:700;color:var(--ink);
+  text-transform:none;letter-spacing:0;font-family:inherit;}
+.st strong{color:inherit;}
+.quote{border:1.5px solid var(--light);padding:16px 22px;font-style:italic;font-size:21px;line-height:1.4;}
+.src{position:absolute;left:54px;bottom:22px;font-size:13px;color:var(--gray);margin:0;}
+
+/* Contacto */
+.contact{position:absolute;left:100px;top:230px;}
+.contact h3{font-size:34px;margin:0 0 12px;color:var(--ink);font-weight:700;text-transform:none;font-family:inherit;}
+.contact p{margin:4px 0;font-size:21px;font-weight:700;}
+.contact .role{color:var(--cyan);}
+
+/* Contexto */
+.stats{position:absolute;left:54px;top:170px;width:1060px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.stat{background:var(--pale);border-radius:12px;padding:20px 20px 22px;min-height:180px;box-sizing:border-box;}
+.stat .num{display:block;font-size:56px;font-weight:700;color:var(--cyan);line-height:1;margin-bottom:12px;}
+.stat .lbl{font-size:18px;line-height:1.35;}
+.stat.hi{background:var(--navy);color:#fff;}
+.stat.hi .num{color:var(--light);}
+.stat em{color:inherit;opacity:.8;}
+.reveal .stats + .quote{position:absolute;left:54px;top:420px;width:1010px;}
+
+/* Evolución */
+.evo{position:absolute;left:54px;top:165px;width:1060px;display:flex;align-items:center;gap:26px;}
+.evo .col{flex:1;border:1.5px solid var(--gray);padding:16px 22px 10px;min-height:300px;box-sizing:border-box;}
+.evo .col.strong{border-color:var(--cyan);}
+.evo .tag{font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--gray);margin-bottom:8px;}
+.evo .col.strong .tag{color:var(--cyan);}
+.evo ul{margin:0;padding-left:22px;font-size:21px;line-height:1.75;}
+.evo li::marker{color:var(--cyan);}
+.evo .arrow{font-size:46px;color:var(--cyan);}
+.evo + .quote{position:absolute;left:54px;top:500px;width:1010px;}
+
+/* Generalidades */
+.cards6{position:absolute;left:150px;top:185px;width:980px;display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px;}
+.card .h{background:var(--cyan);color:#fff;font-weight:700;font-size:20px;text-align:center;padding:12px;border-radius:10px;margin-bottom:10px;}
+.card .b{border:1.5px solid var(--cyan);border-radius:10px;font-size:21px;text-align:center;padding:26px 14px;min-height:42px;}
+.foot{position:absolute;right:120px;bottom:40px;font-size:16px;margin:0;}
+
+/* Por qué */
+.quote.lead{position:absolute;left:54px;top:160px;width:1010px;font-style:italic;}
+.rows{position:absolute;left:54px;top:290px;width:1060px;display:grid;grid-template-columns:1fr 1fr;gap:22px 34px;}
+.row{display:flex;gap:16px;align-items:flex-start;font-size:20px;line-height:1.4;}
+.row .ic{flex:0 0 46px;height:46px;border-radius:50%;background:var(--cyan);color:#fff;font-weight:700;font-size:22px;
+  display:flex;align-items:center;justify-content:center;}
+.tagline{position:absolute;left:54px;top:560px;width:1010px;border:1.5px solid var(--light);padding:14px 22px;
+  font-style:italic;font-size:21px;margin:0;}
+
+/* Electivas */
+.groups{position:absolute;left:54px;top:165px;width:1170px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.grp{background:var(--pale);border-radius:12px;padding:18px 20px;min-height:330px;box-sizing:border-box;}
+.grp h4{margin:0 0 12px;font-size:20px;color:var(--navy);text-transform:none;font-family:inherit;line-height:1.25;}
+.grp ul{margin:0;padding-left:20px;font-size:19px;line-height:1.5;}
+.grp li{margin-bottom:6px;}
+.grp li::marker{color:var(--cyan);}
+.bottomband{position:absolute;left:0;bottom:0;width:860px;background:var(--light);font-size:19px;padding:12px 26px;box-sizing:border-box;}
+
+/* Diferenciales y listas */
+ul.diff{position:absolute;left:54px;top:160px;width:1060px;margin:0;padding-left:26px;font-size:21px;line-height:1.4;}
+ul.diff li{margin-bottom:14px;}
+ul.diff li::marker{color:var(--cyan);}
+ul.diff + .quote{position:absolute;left:54px;top:575px;width:1010px;}
+ul.diff.tight li{margin-bottom:10px;}
+
+/* Perfiles */
+.profiles{position:absolute;left:54px;top:160px;width:1170px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.pf{border:1.5px solid var(--gray);padding:16px 20px;display:flex;flex-direction:column;min-height:470px;box-sizing:border-box;}
+.pf h4{margin:0 0 10px;font-size:21px;text-transform:none;font-family:inherit;color:var(--ink);}
+.pf p{font-size:18px;line-height:1.45;margin:0;flex:1;}
+.pf .pill{background:#EFEFEF;text-align:center;font-weight:700;font-size:16px;padding:8px;margin-top:14px;}
+
+/* Trabajo de grado */
+.split{position:absolute;left:54px;top:160px;width:1170px;display:grid;grid-template-columns:1.35fr 1fr;gap:40px;}
+.sub{font-size:21px;margin:0 0 14px;color:var(--cyan);text-transform:none;font-family:inherit;}
+.mods{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mod{border:1.5px solid var(--cyan);border-radius:10px;padding:14px 16px;min-height:120px;box-sizing:border-box;}
+.mod strong{display:block;font-size:19px;color:var(--navy);margin-bottom:6px;}
+.mod span{font-size:17px;line-height:1.35;}
+ul.acts{margin:0;padding-left:24px;font-size:21px;line-height:1.5;}
+ul.acts li{margin-bottom:14px;}
+ul.acts li::marker{color:var(--cyan);}
+
+/* Horarios */
+.weeks{position:absolute;left:54px;top:450px;width:1050px;}
+.wk-lbl{font-size:18px;font-weight:700;color:var(--cyan);margin-bottom:12px;}
+.wk-row{display:flex;gap:16px;}
+.wk{flex:1;background:var(--cyan);color:#fff;border-radius:10px;padding:14px 16px;}
+.wk span{display:block;font-size:15px;opacity:.9;}
+.wk b{font-size:22px;}
+.wk.next{background:#EFEFEF;color:var(--ink);}
+
+/* Gracias */
+.gracias .photo{position:absolute;left:0;top:0;width:353px;height:720px;object-fit:cover;margin:0;}
+.gracias .thanks{position:absolute;left:470px;top:280px;}
+.gracias h1{font-size:60px;margin:0 0 10px;color:var(--ink);text-transform:none;font-family:inherit;font-weight:700;}
+.gracias p{font-size:24px;margin:4px 0;font-weight:700;color:var(--cyan);}
+.gracias p.small{font-size:18px;color:var(--ink);font-weight:400;}
+
+.reveal .progress{color:var(--cyan);}
+.reveal .controls{color:var(--cyan);}
+
+/* --- ajustes tras revisión --- */
+.reveal .st img.photo,.reveal .st img.lineas,.reveal .st img.logo{max-width:none;max-height:none;}
+.contact{top:250px;}
+.contact h3{font-size:42px;}
+.contact p{font-size:24px;}
+.card .b{display:flex;align-items:center;justify-content:center;min-height:70px;padding:16px 14px;}
+.row{font-size:22px;}
+.rows{top:300px;gap:30px 34px;}
+.pf{min-height:420px;}
+.pf p{font-size:19px;}
+.grp{min-height:300px;}
+.grp ul{font-size:20px;}
+.split{top:175px;}
+.mod{min-height:150px;padding:18px;}
+.mod strong{font-size:21px;}
+.mod span{font-size:18px;}
+.sub{font-size:23px;margin-bottom:18px;}
+ul.acts{font-size:23px;}
+ul.acts li{margin-bottom:20px;}
+html:not(.print-pdf) .reveal .st img{margin:0;border:0;background:transparent;}
+.evo ul{font-size:19px;line-height:1.55;}
+.evo .col{min-height:330px;}
+.evo + .quote{top:530px;}
+.evo .col{min-height:270px;}
+.evo + .quote{top:480px;}
+
+/* Preguntas */
+.qa{position:absolute;left:54px;top:160px;width:1170px;display:grid;grid-template-columns:420px 1fr;gap:14px 22px;align-items:stretch;}
+.qa .q{background:var(--cyan);color:#fff;font-weight:700;font-size:21px;border-radius:10px;padding:14px 20px;display:flex;align-items:center;}
+.qa .a{background:var(--pale);font-size:20px;border-radius:10px;padding:14px 20px;display:flex;align-items:center;line-height:1.3;}
+.qa .a strong{color:var(--navy);margin-right:6px;}
+.quote.center{position:absolute;left:54px;top:590px;width:1110px;text-align:center;font-size:24px;box-sizing:border-box;}
+.qa{grid-template-columns:470px 1fr;}
+.qa .q{font-size:20px;}
+.quote.center{top:560px;width:1170px;}
+</style></head>
+<body><div class="reveal"><div class="slides">
+<section class="mv" data-background-video="videos/Portada_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="#006" data-transition="fade" data-background-transition="fade"></section>
+<section class="mv" data-background-video="videos/Portada_01.mp4" data-background-video-muted data-background-size="contain" data-background-color="#006" data-background-video-loop data-transition="none" data-background-transition="none"><aside class="notes">Bienvenida. La IA ya no es una promesa: es un estándar corporativo.</aside></section>
+<section class="st " data-transition="fade"><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT"><img class="lineas" src="assets/lineas.png" alt="">
+<div class="contact">
+  <div class="person">
+    <h3>Juan David Martínez Vargas, Ph.D.</h3>
+    <p class="role">Profesor gestor del programa</p>
+    <p>Área de Computación y Analítica</p>
+    <p>Escuela de Ciencias Aplicadas e Ingeniería</p>
+  </div>
+</div><aside class="notes">Presentación del equipo del programa.</aside></section>
+<section class="mv" data-background-video="videos/DosEpocas_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="fade" data-background-transition="fade"></section>
+<section class="mv" data-background-video="videos/DosEpocas_01.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Hace unos años resolver este problema era etiquetar datos y entrenar un modelo propio.</aside></section>
+<section class="mv" data-background-video="videos/DosEpocas_02.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Hoy el flujo es otro: se elige un modelo, se adapta, se construye un agente, se evalúa y se observa.</aside></section>
+<section class="mv" data-background-video="videos/DosEpocas_03.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Los dos flujos se apoyan en lo mismo. Elegir, adaptar y evaluar modelos exige más fundamentos, no menos.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Contexto</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT">
+<h2>Las preguntas que hoy se hacen las organizaciones</h2>
+<div class="qa">
+  <div class="q" class="fragment fade-up" data-fragment-index="0">¿Qué modelo uso?</div><div class="a" class="fragment fade-up" data-fragment-index="1"><strong>Aprendizaje automático:</strong> generalización, métricas, sesgo y varianza</div>
+  <div class="q" class="fragment fade-up" data-fragment-index="2">¿Cómo sé que funciona en mi caso?</div><div class="a" class="fragment fade-up" data-fragment-index="3"><strong>Estadística:</strong> diseño de evaluaciones, incertidumbre y comparación rigurosa</div>
+  <div class="q" class="fragment fade-up" data-fragment-index="4">¿Por qué falla y cómo lo mejoro?</div><div class="a" class="fragment fade-up" data-fragment-index="5"><strong>Aprendizaje profundo y optimización:</strong> entender el modelo para adaptarlo</div>
+  <div class="q" class="fragment fade-up" data-fragment-index="6">¿Cómo decide un agente qué hacer?</div><div class="a" class="fragment fade-up" data-fragment-index="7"><strong>Fundamentos de IA:</strong> búsqueda, planificación y razonamiento</div>
+  <div class="q" class="fragment fade-up" data-fragment-index="8">¿Qué pasó en cada paso y cuánto costó?</div><div class="a" class="fragment fade-up" data-fragment-index="9"><strong>Operaciones en datos e IA:</strong> trazas, evaluaciones continuas y LLMOps</div>
+</div>
+<div class="quote center" class="fragment fade-up" data-fragment-index="10">Usar IA es fácil. <strong>Hacerla confiable exige fundamentos.</strong></div>
+<aside class="notes">Cada pregunta la responde una base que enseñamos; las asignaturas aparecen luego en el plan de estudios. Si preguntan por el contexto: Colombia tiene una Política Nacional de IA (CONPES 4144) con la formación de talento como eje, y esta sería la primera maestría en IA de una universidad antioqueña.</aside></section>
+<section class="mv" data-background-video="videos/CicloIA_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="fade" data-background-transition="fade"></section>
+<section class="mv" data-background-video="videos/CicloIA_01.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">El ciclo actual: muchas veces no entrenamos, elegimos un modelo fundacional, lo adaptamos, lo evaluamos y lo observamos en producción.</aside></section>
+<section class="mv" data-background-video="videos/CicloIA_02.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-background-video-loop data-transition="none" data-background-transition="none"></section>
+<section class="mv" data-background-video="videos/ElegirModelo_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="fade" data-background-transition="fade"></section>
+<section class="mv" data-background-video="videos/ElegirModelo_01.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">No hay un mejor modelo en abstracto: hay un mejor modelo para una tarea, un presupuesto y unas restricciones.</aside></section>
+<section class="mv" data-background-video="videos/ElegirModelo_02.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Una restricción como la privacidad cambia por completo la decisión.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT"><img class="lineas" src="assets/lineas.png" alt="">
+<h2>Evolución del perfil en inteligencia artificial</h2>
+<div class="evo">
+  <div class="col">
+    <div class="tag">FORMACIÓN BASE</div>
+    <ul>
+      <li>Programación en Python</li><li>Matemáticas y estadística</li>
+      <li>Análisis de datos</li><li>Entrenamiento de modelos clásicos</li>
+    </ul>
+  </div>
+  <div class="arrow">➜</div>
+  <div class="col strong">
+    <div class="tag">EVOLUCIÓN REQUERIDA</div>
+    <ul>
+      <li class="fragment fade-up" data-fragment-index="0">Aprendizaje profundo, visión y PLN</li>
+      <li class="fragment fade-up" data-fragment-index="1">IA generativa y <strong>agentes</strong></li>
+      <li class="fragment fade-up" data-fragment-index="2"><strong>Selección y adaptación</strong> de modelos fundacionales</li>
+      <li class="fragment fade-up" data-fragment-index="3"><strong>Evaluaciones</strong> rigurosas (evals)</li>
+      <li class="fragment fade-up" data-fragment-index="4">LLMOps: <strong>trazas</strong>, costos y observabilidad</li>
+      <li class="fragment fade-up" data-fragment-index="5">Ética, gobernanza y liderazgo de proyectos de IA</li>
+    </ul>
+  </div>
+</div>
+<div class="quote">El valor ya no está solo en entrenar modelos, sino en elegir, adaptar, evaluar y operar el adecuado</div>
+<aside class="notes">El profesional en IA hoy decide qué modelo usar, lo adapta, lo evalúa y lo opera con trazabilidad, cada vez más en forma de agentes.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT">
+<h2>Generalidades de la maestría</h2>
+<div class="cards6">
+  <div class="card" class="fragment fade-up" data-fragment-index="0"><div class="h">Denominación</div><div class="b">Maestría en Inteligencia Artificial</div></div>
+  <div class="card" class="fragment fade-up" data-fragment-index="0"><div class="h">Título a otorgar</div><div class="b">Magíster en Inteligencia Artificial</div></div>
+  <div class="card" class="fragment fade-up" data-fragment-index="0"><div class="h">Modalidades</div><div class="b">Presencial y virtual *</div></div>
+  <div class="card" class="fragment fade-up" data-fragment-index="1"><div class="h">Duración</div><div class="b">3 semestres</div></div>
+  <div class="card" class="fragment fade-up" data-fragment-index="1"><div class="h">Créditos</div><div class="b">36 créditos</div></div>
+  <div class="card" class="fragment fade-up" data-fragment-index="1"><div class="h">Admisión</div><div class="b">Semestral</div></div>
+</div>
+<p class="foot">* Mismo plan de estudios en ambas modalidades · Inicio de clases: marzo de 2027</p>
+<aside class="notes">Tres semestres, 36 créditos, presencial y virtual con el mismo plan de estudios.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT">
+<h2>¿Por qué esta maestría?</h2>
+<div class="quote lead">Formamos líderes capaces de <strong>diseñar, integrar y escalar sistemas de IA responsables</strong>, desde el modelo hasta el despliegue</div>
+<div class="rows">
+  <div class="row" class="fragment fade-up" data-fragment-index="0"><span class="ic">1</span><div><strong>Agentes de principio a fin:</strong> desde los agentes clásicos en Fundamentos de IA hasta agentes con LLM en producción</div></div>
+  <div class="row" class="fragment fade-up" data-fragment-index="1"><span class="ic">2</span><div><strong>El ciclo actual de la IA:</strong> seleccionar, adaptar, evaluar y observar modelos con MLOps y LLMOps</div></div>
+  <div class="row" class="fragment fade-up" data-fragment-index="2"><span class="ic">3</span><div><strong>Rigor matemático aplicado</strong> y aprender haciendo con proyectos integradores y retos reales</div></div>
+  <div class="row" class="fragment fade-up" data-fragment-index="3"><span class="ic">4</span><div><strong>IA responsable:</strong> ética, integridad y gobernanza como eje transversal</div></div>
+</div>
+<p class="tagline" class="fragment fade-up" data-fragment-index="4">No se trata solo de usar IA, sino de diseñar, evaluar y liderar soluciones completas</p>
+<aside class="notes">Ya vimos el contexto y el ciclo de vida. Ahora, qué formación permite desarrollar estas capacidades.</aside></section>
+<section class="mv" data-background-video="videos/Recorrido_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="fade" data-background-transition="fade"></section>
+<section class="mv" data-background-video="videos/Recorrido_01.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Tres etapas. Los agentes atraviesan todo el recorrido: aparecen en Fundamentos de IA y llegan a producción en el tercer semestre.</aside></section>
+<section class="mv" data-background-video="videos/Recorrido_02.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-background-video-loop data-transition="none" data-background-transition="none"><aside class="notes">Fundamentos de IA: el agente que percibe su entorno, busca, planifica y actúa. Es la base conceptual de los agentes con LLM.</aside></section>
+<section class="mv" data-background-video="videos/Recorrido_03.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"></section>
+<section class="mv" data-background-video="videos/Recorrido_04.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Las bases: matemáticas, estadística, aprendizaje automático y profundo.</aside></section>
+<section class="mv" data-background-video="videos/Recorrido_05.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"></section>
+<section class="mv" data-background-video="videos/Recorrido_06.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Segundo semestre: visión por computador y PLN con transformers, la base de los modelos de lenguaje.</aside></section>
+<section class="mv" data-background-video="videos/Recorrido_07.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-background-video-loop data-transition="none" data-background-transition="none"><aside class="notes">El mismo ciclo percibir–razonar–actuar de Fundamentos de IA, ahora con un LLM que usa herramientas. Es el corazón del curso de IA generativa.</aside></section>
+<section class="mv" data-background-video="videos/Recorrido_08.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"></section>
+<section class="mv" data-background-video="videos/Recorrido_09.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">LLMOps y AgentOps: cada ejecución deja una traza con latencia, tokens y costo, y cada versión pasa por evaluaciones.</aside></section>
+<section class="mv" data-background-video="videos/PlanEstudios_00.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="fade" data-background-transition="fade"></section>
+<section class="mv" data-background-video="videos/PlanEstudios_01.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Semestre 1: fundamentos, incluidos los agentes en Fundamentos de IA. Funciona también como línea de énfasis para pregrado.</aside></section>
+<section class="mv" data-background-video="videos/PlanEstudios_02.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Semestre 2: visión, PLN y seminario de proyecto de grado.</aside></section>
+<section class="mv" data-background-video="videos/PlanEstudios_03.mp4" data-background-video-muted data-background-size="contain" data-background-color="white" data-transition="none" data-background-transition="none"><aside class="notes">Semestre 3: IA generativa y agentes, operación con MLOps y LLMOps, y trabajo de grado.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT">
+<h2>Asignaturas electivas</h2>
+<div class="groups">
+  <div class="grp" class="fragment fade-up" data-fragment-index="0"><h4>Matemáticas y estadística</h4><ul><li>Estadística avanzada</li><li>Optimización</li><li>Métodos numéricos</li></ul></div>
+  <div class="grp" class="fragment fade-up" data-fragment-index="1"><h4>Desarrollo de software</h4><ul><li>Computación en la nube</li><li>Desarrollo de software para IA</li></ul></div>
+  <div class="grp" class="fragment fade-up" data-fragment-index="2"><h4>Procesamiento y visualización de datos</h4><ul><li>Visualización de datos</li><li>Almacenamiento y procesamiento de grandes datos</li></ul></div>
+  <div class="grp" class="fragment fade-up" data-fragment-index="3"><h4>Electivas del ecosistema</h4><ul><li>Asignaturas de la Maestría en Ciencias de los Datos y Analítica</li><li>Otros posgrados de la Escuela</li></ul></div>
+</div>
+<div class="bottomband">El estudiante cursa una electiva por semestre y <strong>Formación en integridad</strong> (3 créditos)</div>
+<aside class="notes">Las electivas permiten orientar la formación: más matemáticas, más software o más datos.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT"><img class="lineas" src="assets/lineas.png" alt="">
+<h2>Diferenciales del programa</h2>
+<ul class="diff">
+  <li class="fragment fade-up" data-fragment-index="0"><strong>Trayectoria académica:</strong> articulación con el Sistema Metro, desde la línea de énfasis en pregrado hasta el doctorado</li>
+  <li class="fragment fade-up" data-fragment-index="1"><strong>Currículo flexible:</strong> 9 créditos electivos (25 %), incluida Formación en integridad</li>
+  <li class="fragment fade-up" data-fragment-index="2"><strong>Aprendizaje práctico:</strong> proyectos integradores en el primer y el segundo semestre</li>
+  <li class="fragment fade-up" data-fragment-index="3"><strong>Docentes de planta con doctorado</strong> e investigación en grupos A1 de Minciencias</li>
+  <li class="fragment fade-up" data-fragment-index="4"><strong>IA actual:</strong> agentes, evaluaciones y LLMOps integrados al plan de estudios</li>
+  <li class="fragment fade-up" data-fragment-index="4"><strong>Conexión con el entorno:</strong> retos con empresas y créditos de nube en AWS, Google Cloud y Azure</li>
+  <li class="fragment fade-up" data-fragment-index="5"><strong>Microcredenciales:</strong> Fundamentos de IA, Aprendizaje profundo, PLN e IA generativa conforman la Credencial en IA</li>
+</ul>
+<div class="quote" class="fragment fade-up" data-fragment-index="6">La primera maestría en IA de una universidad antioqueña: presencial en Medellín y virtual en todo el país</div>
+<aside class="notes">Lo que nos diferencia: trayectoria, flexibilidad, práctica, profesores e integración con el ecosistema.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT">
+<h2>Perfiles del programa</h2>
+<div class="profiles">
+  <div class="pf" class="fragment fade-up" data-fragment-index="0"><h4>Perfil de ingreso</h4>
+    <p>Profesional de ciencias, ingenierías, finanzas, administración, economía o áreas afines, con conocimientos en matemáticas, estadística y computación, interesado en <strong>liderar</strong> el desarrollo de productos y servicios innovadores basados en IA.</p>
+    <div class="pill">Base cuantitativa</div></div>
+  <div class="pf" class="fragment fade-up" data-fragment-index="1"><h4>Perfil de egreso</h4>
+    <p>Diseña soluciones a problemas complejos de diversos sectores mediante la construcción, optimización y evaluación crítica de modelos de IA, y lidera proyectos de desarrollo tecnológico con sostenibilidad, rigor científico y responsabilidad ética.</p>
+    <div class="pill">Capacidad de diseñar soluciones de IA</div></div>
+  <div class="pf" class="fragment fade-up" data-fragment-index="2"><h4>Perfil ocupacional</h4>
+    <p>Gestor de proyectos de IA, arquitecto o ingeniero de soluciones de IA y consultor estratégico en IA, en la industria, el sector público y organizaciones de distintos sectores.</p>
+    <div class="pill">Roles en la industria</div></div>
+</div>
+<aside class="notes">Dirigido a profesionales con base cuantitativa que quieren liderar soluciones de IA.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT"><img class="lineas" src="assets/lineas.png" alt="">
+<h2>Trabajo de grado y actividades</h2>
+<div class="split">
+  <div>
+    <h4 class="sub">Modalidades de trabajo de grado (6 créditos)</h4>
+    <div class="mods">
+      <div class="mod" class="fragment fade-up" data-fragment-index="0"><strong>Proyecto aplicado</strong><span>Solución a un problema con dominio del estado del arte</span></div>
+      <div class="mod" class="fragment fade-up" data-fragment-index="0"><strong>Artículo en revista indexada</strong><span>En coautoría con el director</span></div>
+      <div class="mod" class="fragment fade-up" data-fragment-index="0"><strong>Caso de estudio aplicado</strong><span>Problema real o hipotético con datos y método analítico</span></div>
+      <div class="mod" class="fragment fade-up" data-fragment-index="0"><strong>Pasantía</strong><span>En un grupo de investigación, de 3 a 6 meses</span></div>
+    </div>
+  </div>
+  <div>
+    <h4 class="sub">Actividades</h4>
+    <ul class="acts">
+      <li class="fragment fade-up" data-fragment-index="1">Charlas con expertos de la industria</li>
+      <li class="fragment fade-up" data-fragment-index="1">Retos y competencias de IA</li>
+      <li class="fragment fade-up" data-fragment-index="1">Proyectos con empresas, ONG y entidades públicas</li>
+      <li class="fragment fade-up" data-fragment-index="1">Seminarios sobre tendencias en IA</li>
+    </ul>
+  </div>
+</div>
+<aside class="notes">El resultado esperado es saber hacer: un prototipo, una solución o un modelo implementado.</aside></section>
+<section class="st " data-transition="fade"><div class="band">Maestría en Inteligencia Artificial</div><img class="logo" src="assets/logo_navy.svg" alt="Universidad EAFIT"><img class="lineas" src="assets/lineas.png" alt="">
+<h2>Horarios (modalidad presencial)</h2>
+<ul class="diff tight">
+  <li>Clases en horarios compatibles con la vida laboral</li>
+  <li>Sesiones sincrónicas y actividades asincrónicas (si aplica)</li>
+  <li><strong>Inicio de clases:</strong> primer fin de semana de marzo de 2027</li>
+  <li><strong>Asignaturas obligatorias:</strong> viernes y sábados</li>
+  <li><strong>Asignaturas electivas:</strong> entre semana, en paralelo con las obligatorias</li>
+</ul>
+<div class="weeks">
+  <div class="wk-lbl">Una asignatura obligatoria = 3 fines de semana</div>
+  <div class="wk-row">
+    <div class="wk fragment fade-right" data-fragment-index="0"><span>Fin de semana 1</span><b>Vie · Sáb</b></div>
+    <div class="wk fragment fade-right" data-fragment-index="1"><span>Fin de semana 2</span><b>Vie · Sáb</b></div>
+    <div class="wk fragment fade-right" data-fragment-index="2"><span>Fin de semana 3</span><b>Vie · Sáb</b></div>
+    <div class="wk next fragment fade-right" data-fragment-index="3"><span>Siguiente asignatura</span><b>→</b></div>
+  </div>
+</div>
+<aside class="notes">Pensado para profesionales que trabajan. No hay clases en Semana Santa ni fines de semana festivos.</aside></section>
+<section class="st gracias" data-transition="zoom"><img class="photo" src="assets/campus.jpg" alt="Campus EAFIT"><img class="lineas" src="assets/lineas.png" alt=""><div class="thanks"><h1>¡Gracias!</h1><p>Maestría en Inteligencia Artificial</p><p class="small">Universidad EAFIT · Medellín</p></div><aside class="notes">Cierre e invitación a preguntas.</aside></section>
+</div></div>
+<script src="reveal/reveal.js"></script>
+<script src="reveal/notes.js"></script>
+<script>
+Reveal.initialize({width:1280,height:720,margin:0,minScale:0.2,maxScale:2,center:false,hash:true,
+  controls:true,progress:true,slideNumber:false,transition:'fade',backgroundTransition:'fade',
+  plugins:[RevealNotes]});
+</script></body></html>
