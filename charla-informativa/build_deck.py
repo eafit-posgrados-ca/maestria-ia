@@ -342,8 +342,13 @@ def build():
     shutil.copy(ROOT / "vendor/reveal/plugin/notes/notes.js", DIST / "reveal/notes.js")
     sections = []
     guion = load_guion()
-    for kind, key, v in ORDER:
-        sections += scene_sections(key, guion) if kind == "scene" else [with_notes(v, guion.get(key))]
+    total = len(ORDER)
+    for k, (kind, key, v) in enumerate(ORDER, start=1):
+        # número lógico: una escena animada cuenta como una diapositiva aunque tenga varios pasos
+        g = {kk: f'<p class="num"><b>Diapositiva {k} de {total}</b></p>' + vv for kk, vv in guion.items()
+             if kk == key or kk.startswith(key + ".")}
+        secs = scene_sections(key, g) if kind == "scene" else [with_notes(v, g.get(key))]
+        sections += [x.replace("<section ", f'<section data-num="{k}" ', 1) for x in secs]
     html = f"""<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -353,6 +358,7 @@ def build():
 <body><div class="reveal"><div class="slides">
 {chr(10).join(sections)}
 </div></div>
+<div id="num-dia" aria-live="polite"></div>
 <div id="guion-btns"><button type="button" id="btn-guion" title="Mostrar u ocultar el guion (tecla N)">Guion</button><button type="button" id="btn-presentador" title="Vista del presentador en otra ventana (tecla S)">Presentador</button></div>
 <script src="{REVEAL}/reveal.js"></script>
 <script src="{REVEAL}/notes.js"></script>
@@ -364,6 +370,9 @@ Reveal.initialize({{width:1280,height:720,margin:0,minScale:0.2,maxScale:2,cente
   keyboard:{{78:function(){{toggleGuion();}}}}}});
 function toggleGuion(){{Reveal.configure({{showNotes:!Reveal.getConfig().showNotes}});document.getElementById('btn-guion').classList.toggle('on',Reveal.getConfig().showNotes);setTimeout(function(){{Reveal.layout();}},50);setTimeout(function(){{Reveal.layout();}},400);}}
 document.getElementById('btn-guion').onclick=toggleGuion;
+function numDia(){{var s=Reveal.getCurrentSlide();var n=s&&s.getAttribute('data-num');
+  document.getElementById('num-dia').textContent=(n&&n!=='1')?(n+' / {total}'):'';}}
+Reveal.on('ready',numDia);Reveal.on('slidechanged',numDia);
 document.getElementById('btn-presentador').onclick=function(){{var n=Reveal.getPlugin('notes');if(n)n.open();}};
 </script></body></html>"""
     (DIST / "index.html").write_text(html, encoding="utf-8")
