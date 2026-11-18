@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "juan-david-rodriguez-ceron",
+    "nombre": "Juan David Rodríguez Cerón",
+    "vinculacion": "catedra",
+    "areas": [
+      "Inteligencia artificial aplicada y generativa",
+      "Analítica de datos",
+      "Automatización de procesos",
+      "Transformación digital educativa"
+    ],
+    "biografia": "Ingeniero electrónico, magíster en Inteligencia Artificial y especialista en Gerencia de Proyectos. Tiene experiencia en docencia STEM bilingüe, mentoría en Python y desarrollo de soluciones de automatización para procesos académicos y administrativos. Fundó el semillero Beyond GPT, dedicado a la inteligencia artificial generativa, la automatización y la ciencia de datos."
+  }
+]

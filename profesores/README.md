@@ -1,6 +1,6 @@
 # Profesores de la Maestría en Inteligencia Artificial
 
-El archivo [profesores.json](profesores.json) es el catálogo de perfiles académicos de la maestría. Se mantiene desde el repositorio y puede servir como fuente para un directorio en la web. El catálogo empieza vacío hasta que se incorporen perfiles aprobados para publicación.
+El archivo [profesores.json](profesores.json) es el catálogo de perfiles académicos de la maestría. Se mantiene desde el repositorio y puede servir como fuente para un directorio en la web.
 
 ## Ficha de un profesor
 
@@ -10,7 +10,7 @@ Cada entrada representa a una persona. Usa un identificador único en minúscula
 | --- | --- |
 | `id` | Identificador estable, por ejemplo `ana-ejemplo`. |
 | `nombre` | Nombre completo para mostrar en el directorio. |
-| `vinculacion` | `planta` o `catedra`. |
+| `vinculacion` | `planta` o `catedra`. Usa `null` mientras se confirma la vinculación con la maestría. |
 | `areas` | Lista opcional de áreas de docencia o investigación. |
 | `biografia` | Reseña académica breve y opcional. |
 | `perfil_url` | Enlace HTTPS opcional a un perfil institucional o académico público. |
@@ -33,6 +33,6 @@ Para incorporar un perfil, agrega su ficha a la lista y revisa el cambio en Git.
 
 ## Directorio web y hojas de vida
 
-La [presentación existente](../charla-informativa/README.md) genera un sitio estático en `charla-informativa/dist/`. Si ese es el contenido que se publica, el directorio puede añadirse como una página `profesores/index.html` dentro de esa salida. El ensamblado copiaría el catálogo junto a la página y la presentación enlazaría al directorio. La página podría filtrar por planta y cátedra a partir de `vinculacion`.
+La [presentación existente](../charla-informativa/README.md) genera un sitio estático en `charla-informativa/dist/`. Si ese es el contenido que se publica, el directorio puede añadirse como una página `profesores/index.html` dentro de esa salida. El ensamblado exportaría los perfiles aprobados para publicación cuya vinculación esté confirmada y la presentación enlazaría al directorio. La página podría filtrar por planta y cátedra a partir de `vinculacion`.
 
 Usa el catálogo para información académica apta para publicación. Las hojas de vida completas se guardan localmente en `cvs/`, que está excluida de Git. Para compartir esos documentos con el equipo, usa un espacio institucional con acceso restringido.
